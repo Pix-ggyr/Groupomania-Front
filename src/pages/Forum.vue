@@ -1,0 +1,33 @@
+<template>
+  <section class="body">
+    <main class="container">
+      <h1>Let's share with the community</h1>
+      <a href="popups/popup-create-post.html"
+        ><button class="post-now-btn">
+          <i class="fas fa-pencil-alt"> Create your post !</i>
+        </button></a
+      >
+      <div class="news-feed"></div>
+    </main>
+  </section>
+</template>
+
+<script>
+export default {
+  name: 'Forum',
+};
+</script>
+
+<style>
+.post-now-btn {
+  margin: 40px;
+  justify-self: right;
+  width: 180px;
+  height: 50px;
+}
+
+.post-now-btn a {
+  color: white;
+  text-decoration: none;
+}
+</style>
