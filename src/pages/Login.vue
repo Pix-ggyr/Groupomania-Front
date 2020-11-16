@@ -24,34 +24,46 @@
           aria-label="password"
         /><br />
         <input
-          class="submit-btn"
+          id="login-btn"
           type="submit"
           name="submit"
           aria-label="submit"
-          value="Submit"
+          value="Login"
         />
       </form>
       <p>
         Not registered yet ?
-        <span class="popup-trigger"
-          ><a href="popups/popup-register.html">Sign-up right now !</a></span
-        >
+        <span class="popup-trigger"><a>Sign-up right now !</a></span>
       </p>
+      <PopupRegister />
     </main>
+    <Footer />
   </section>
 </template>
 
 <script>
+import Footer from '@/components/Footer';
+import PopupRegister from '@/components/PopupRegister';
+
 export default {
   name: 'Login',
+  components: {
+    Footer,
+    PopupRegister,
+  },
 };
 </script>
 
 <style lang="scss" scoped>
+#login {
+  display: flex;
+  flex-flow: column nowrap;
+}
+
 #login input {
   margin: 10px;
   color: darkblue;
-  background-color: ghostwhite;
+  background-color: white;
   font-family: 'Dosis', sans-serif;
   font-weight: 700;
   height: 40px;
@@ -63,8 +75,17 @@ export default {
 }
 
 #login label {
-  font-size: 24px;
+  font-size: 18px;
   padding-left: 10px;
   color: darkblue;
+}
+
+#login > #login-btn {
+  background-color: rgb(19, 93, 230);
+  color: white;
+  text-transform: uppercase;
+  box-shadow: rgba(0, 0, 0, 0.356) -2px 2px 0.1em;
+  width: 100px;
+  align-self: center;
 }
 </style>

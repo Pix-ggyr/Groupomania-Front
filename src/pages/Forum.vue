@@ -1,5 +1,6 @@
 <template>
   <section class="body">
+    <Header />
     <main class="container">
       <h1>Let's share with the community</h1>
       <a href="popups/popup-create-post.html"
@@ -8,13 +9,24 @@
         </button></a
       >
       <div class="news-feed"></div>
+      <Post />
     </main>
+    <Footer />
   </section>
 </template>
 
 <script>
+import Header from '@/components/Header';
+import Footer from '@/components/Footer';
+import Post from '@/components/Post';
+
 export default {
   name: 'Forum',
+  components: {
+    Header,
+    Footer,
+    Post,
+  },
 };
 </script>
 

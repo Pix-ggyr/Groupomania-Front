@@ -1,5 +1,6 @@
 <template>
   <section class="body">
+    <Header />
     <main class="container">
       <h1>Your profile</h1>
       <div class="user-profile">
@@ -24,12 +25,20 @@
 
       <button id="log-out" name="log-out" aria-label="log-out">Log out</button>
     </main>
+    <Footer />
   </section>
 </template>
 
 <script>
+import Header from '@/components/Header';
+import Footer from '@/components/Footer';
+
 export default {
   name: 'Profile',
+  components: {
+    Header,
+    Footer,
+  },
 };
 </script>
 
@@ -51,6 +60,6 @@ export default {
   width: 120px;
   height: 48px;
   color: white;
-  background-color: rgba(255, 0, 0, 0.555);
+  background-color: #fd2d01;
 }
 </style>
