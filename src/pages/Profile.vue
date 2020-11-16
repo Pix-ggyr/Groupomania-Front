@@ -6,7 +6,6 @@
       <div class="user-profile">
         <div id="profile-pct">
           <img src="../assets/ciri.jpg" alt="user-profile-picture" />
-          <button id="pp-edit">Edit</button>
         </div>
         <div id="user-infos">
           <h2 id="user-name">Jeanne BOND</h2>
@@ -17,7 +16,7 @@
           </p>
           <button id="description-edit">
             <a href="popups/popup-user-profile-edit.html"
-              >Edit your description</a
+              >Edit your informations</a
             >
           </button>
         </div>
@@ -25,6 +24,7 @@
 
       <button id="log-out" name="log-out" aria-label="log-out">Log out</button>
     </main>
+    <PopupEditProfile />
     <Footer />
   </section>
 </template>
@@ -32,12 +32,14 @@
 <script>
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
+import PopupEditProfile from '@/components/PopupEditProfile';
 
 export default {
   name: 'Profile',
   components: {
     Header,
     Footer,
+    PopupEditProfile,
   },
 };
 </script>

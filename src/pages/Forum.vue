@@ -11,6 +11,7 @@
       <div class="news-feed"></div>
       <Post />
     </main>
+    <PopupPost />
     <Footer />
   </section>
 </template>
@@ -19,6 +20,7 @@
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import Post from '@/components/Post';
+import PopupPost from '@/components/PopupPost';
 
 export default {
   name: 'Forum',
@@ -26,6 +28,7 @@ export default {
     Header,
     Footer,
     Post,
+    PopupPost,
   },
 };
 </script>
