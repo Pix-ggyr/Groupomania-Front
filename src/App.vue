@@ -1,5 +1,8 @@
 <template>
-  <section :is="getCurrentPage()" />
+  <div>
+    <section :is="getCurrentPage()" />
+    <portal-target name="popup" />
+  </div>
 </template>
 
 <script>

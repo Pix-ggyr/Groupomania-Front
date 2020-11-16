@@ -33,10 +33,12 @@
       </form>
       <p>
         Not registered yet ?
-        <span class="popup-trigger"><a>Sign-up right now !</a></span>
+        <span class="popup-trigger"
+          ><a @click.prevent="showRegisterPopup()">Sign-up right now !</a></span
+        >
       </p>
-      <PopupRegister />
     </main>
+    <PopupRegister v-if="displayPopupRegister" />
     <Footer />
   </section>
 </template>
@@ -50,6 +52,16 @@ export default {
   components: {
     Footer,
     PopupRegister,
+  },
+  data() {
+    return {
+      displayPopupRegister: false,
+    };
+  },
+  methods: {
+    showRegisterPopup() {
+      this.displayPopupRegister = true;
+    },
   },
 };
 </script>

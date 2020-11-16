@@ -5,6 +5,7 @@ html {
 
 body,
 .body {
+  z-index: 1;
   min-height: 100vh;
   display: flex;
   flex-flow: column nowrap;
@@ -15,6 +16,15 @@ body,
   font-size: 16px;
   font-weight: 500;
   background-color: #fff3d1;
+}
+
+.body.blurry {
+  -webkit-filter: blur(5px);
+  -moz-filter: blur(5px);
+  -o-filter: blur(5px);
+  -ms-filter: blur(5px);
+  filter: blur(5px) grayscale(70%);
+  transition: filter 1s linear;
 }
 
 h1 {
@@ -145,13 +155,13 @@ button {
 /* Popup Style */
 
 .popup {
-  max-width: 320px;
+  z-index: 99;
+  width: 400px;
   max-height: auto;
   display: flex;
   flex-flow: column wrap;
   overflow: hidden;
   justify-content: space-evenly;
-  margin: 40px;
   padding: 20px;
   border-radius: 12px;
   box-shadow: rgba(13, 13, 95, 0.356) -8px 8px 0.3em;
