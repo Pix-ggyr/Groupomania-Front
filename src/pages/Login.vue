@@ -33,8 +33,8 @@
       </form>
       <p>
         Not registered yet ?
-        <span class="popup-trigger"
-          ><a @click.prevent="showRegisterPopup()">Sign-up right now !</a></span
+        <a class="popup-trigger" @click.prevent="showRegisterPopup()"
+          >Sign-up right now !</a
         >
       </p>
     </main>
@@ -99,5 +99,11 @@ export default {
   box-shadow: rgba(0, 0, 0, 0.356) -2px 2px 0.1em;
   width: 100px;
   align-self: center;
+}
+
+a.popup-trigger {
+  font-weight: bold;
+  color: darkblue;
+  cursor: pointer;
 }
 </style>

@@ -2,8 +2,8 @@
   <portal to="popup">
     <section class="popup">
       <header class="popup-header">
-        <h1 class="popup-title">Register now !</h1>
-        <button class="popup-close-btn">X</button>
+        <h1 class="popup-title"></h1>
+        <button class="popup-close-btn" @click.prevent="closePopup()">X</button>
       </header>
       <form class="popup-form">
         <slot></slot>
@@ -24,6 +24,16 @@ export default {
   },
   beforeDestroy() {
     document.querySelector('.body').classList.remove('blurry');
+  },
+  data() {
+    return {
+      hidePopup: false,
+    };
+  },
+  methods: {
+    closePopup() {
+      this.hidePopup = true;
+    },
   },
 };
 </script>

@@ -3,15 +3,13 @@
     <Header />
     <main class="container">
       <h1>Let's share with the community</h1>
-      <a href="popups/popup-create-post.html"
-        ><button class="post-now-btn">
-          <i class="fas fa-pencil-alt"> Create your post !</i>
-        </button></a
-      >
+      <button class="post-now-btn" @click.prevent="showPopupPost()">
+        <i class="fas fa-pencil-alt"> Create your post !</i>
+      </button>
       <div class="news-feed"></div>
       <Post />
     </main>
-    <PopupPost />
+    <PopupPost v-if="displayPopupPost" />
     <Footer />
   </section>
 </template>
@@ -29,6 +27,16 @@ export default {
     Footer,
     Post,
     PopupPost,
+  },
+  data() {
+    return {
+      displayPopupPost: false,
+    };
+  },
+  methods: {
+    showPopupPost() {
+      this.displayPopupPost = true;
+    },
   },
 };
 </script>

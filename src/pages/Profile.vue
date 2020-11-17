@@ -14,17 +14,15 @@
             Hello ! My name is Jeanne Bond and come from Bayonne. I'm 22 years
             old and I'm currently working in the human resources of Groupomania.
           </p>
-          <button id="description-edit">
-            <a href="popups/popup-user-profile-edit.html"
-              >Edit your informations</a
-            >
+          <button id="description-edit" @click="showEditProfilePopup()">
+            Edit your informations
           </button>
         </div>
       </div>
 
       <button id="log-out" name="log-out" aria-label="log-out">Log out</button>
     </main>
-    <PopupEditProfile />
+    <PopupEditProfile v-if="displayEditProfilePopup" />
     <Footer />
   </section>
 </template>
@@ -40,6 +38,16 @@ export default {
     Header,
     Footer,
     PopupEditProfile,
+  },
+  data() {
+    return {
+      displayEditProfilePopup: false,
+    };
+  },
+  methods: {
+    showEditProfilePopup() {
+      this.displayEditProfilePopup = true;
+    },
   },
 };
 </script>

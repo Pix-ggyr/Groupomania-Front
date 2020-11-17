@@ -23,8 +23,8 @@ body,
   -moz-filter: blur(5px);
   -o-filter: blur(5px);
   -ms-filter: blur(5px);
-  filter: blur(5px) grayscale(70%);
-  transition: filter 1s linear;
+  filter: blur(5px) grayscale(30%);
+  transition: filter 0.2s linear;
 }
 
 h1 {
@@ -150,6 +150,7 @@ button {
   box-shadow: rgba(0, 0, 0, 0.356) -2px 2px 0.1em;
   background-color: rgb(19, 93, 230);
   color: white;
+  cursor: pointer;
 }
 
 /* Popup Style */
