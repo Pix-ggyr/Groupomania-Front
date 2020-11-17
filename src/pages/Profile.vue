@@ -1,5 +1,5 @@
 <template>
-  <section class="body">
+  <section class="body" @click="closePopup">
     <Header />
     <main class="container">
       <h1>Your profile</h1>
@@ -14,7 +14,10 @@
             Hello ! My name is Jeanne Bond and come from Bayonne. I'm 22 years
             old and I'm currently working in the human resources of Groupomania.
           </p>
-          <button id="description-edit" @click="showEditProfilePopup()">
+          <button
+            id="description-edit"
+            @click.prevent.stop="showEditProfilePopup()"
+          >
             Edit your informations
           </button>
         </div>
@@ -28,6 +31,7 @@
 </template>
 
 <script>
+import bus from '@/bus';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import PopupEditProfile from '@/components/PopupEditProfile';
@@ -39,6 +43,9 @@ export default {
     Footer,
     PopupEditProfile,
   },
+  created() {
+    bus.$on('close-popup', this.closeEditProfilePopup);
+  },
   data() {
     return {
       displayEditProfilePopup: false,
@@ -47,6 +54,13 @@ export default {
   methods: {
     showEditProfilePopup() {
       this.displayEditProfilePopup = true;
+    },
+    closeEditProfilePopup() {
+      this.displayEditProfilePopup = false;
+    },
+    closePopup() {
+      if (!this.$el.classList.contains('blurry')) return;
+      bus.$emit('close-popup');
     },
   },
 };

@@ -17,7 +17,7 @@
       </nav>
     </div>
     <div class="my-pp">
-      <a href="/public/profile.html"
+      <a href="/profile"
         ><img src="../assets/ciri.jpg" alt="my-profile-picture"
       /></a>
     </div>

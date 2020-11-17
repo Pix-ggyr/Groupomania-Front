@@ -1,9 +1,9 @@
 <template>
-  <section class="body">
+  <section class="body" @click="closePopup">
     <Header />
     <main class="container">
       <h1>Let's share with the community</h1>
-      <button class="post-now-btn" @click.prevent="showPopupPost()">
+      <button class="post-now-btn" @click.prevent.stop="showPopupPost()">
         <i class="fas fa-pencil-alt"> Create your post !</i>
       </button>
       <div class="news-feed"></div>
@@ -15,6 +15,7 @@
 </template>
 
 <script>
+import bus from '@/bus';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import Post from '@/components/Post';
@@ -33,9 +34,19 @@ export default {
       displayPopupPost: false,
     };
   },
+  created() {
+    bus.$on('close-popup', this.closePopupPost);
+  },
   methods: {
     showPopupPost() {
       this.displayPopupPost = true;
+    },
+    closePopupPost() {
+      this.displayPopupPost = false;
+    },
+    closePopup() {
+      if (!this.$el.classList.contains('blurry')) return;
+      bus.$emit('close-popup');
     },
   },
 };

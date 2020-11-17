@@ -1,5 +1,5 @@
 <template>
-  <section class="body">
+  <section class="body" @click="closePopup">
     <main class="container">
       <img
         id="logo"
@@ -33,7 +33,7 @@
       </form>
       <p>
         Not registered yet ?
-        <a class="popup-trigger" @click.prevent="showRegisterPopup()"
+        <a class="popup-trigger" @click.prevent.stop="showRegisterPopup()"
           >Sign-up right now !</a
         >
       </p>
@@ -44,6 +44,7 @@
 </template>
 
 <script>
+import bus from '@/bus';
 import Footer from '@/components/Footer';
 import PopupRegister from '@/components/PopupRegister';
 
@@ -53,6 +54,9 @@ export default {
     Footer,
     PopupRegister,
   },
+  created() {
+    bus.$on('close-popup', this.closeRegisterPopup);
+  },
   data() {
     return {
       displayPopupRegister: false,
@@ -61,6 +65,13 @@ export default {
   methods: {
     showRegisterPopup() {
       this.displayPopupRegister = true;
+    },
+    closeRegisterPopup() {
+      this.displayPopupRegister = false;
+    },
+    closePopup() {
+      if (!this.$el.classList.contains('blurry')) return;
+      bus.$emit('close-popup');
     },
   },
 };

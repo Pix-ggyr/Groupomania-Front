@@ -1,5 +1,5 @@
 <template>
-  <PopupLayout>
+  <PopupLayout title="Edit your infos">
     <label for="u-name">Your name :</label><br />
     <input
       type="text"

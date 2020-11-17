@@ -1,5 +1,5 @@
 <template>
-  <PopupLayout>
+  <PopupLayout title="Create your post !">
     <label for="post-title">Your title* :</label><br />
     <input
       type="text"

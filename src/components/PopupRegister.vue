@@ -1,5 +1,5 @@
 <template>
-  <PopupLayout>
+  <PopupLayout title="Register now !">
     <label for="u-email">Your email* :</label><br />
     <input
       type="text"

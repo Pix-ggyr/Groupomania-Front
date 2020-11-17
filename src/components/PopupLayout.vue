@@ -2,13 +2,19 @@
   <portal to="popup">
     <section class="popup">
       <header class="popup-header">
-        <h1 class="popup-title"></h1>
-        <button class="popup-close-btn" @click.prevent="closePopup()">X</button>
+        <h1 class="popup-title">{{ title }}</h1>
+        <button class="popup-close-btn" @click.prevent="closePopup()">
+          X
+        </button>
       </header>
       <form class="popup-form">
         <slot></slot>
         <div class="popup-submit-btn">
-          <input type="button" value="Cancel" />
+          <input
+            type="button"
+            value="Cancel"
+            @click.prevent.stop="closePopup()"
+          />
           <input type="submit" value="Submit" />
         </div>
       </form>
@@ -17,6 +23,8 @@
 </template>
 
 <script>
+import bus from '@/bus';
+
 export default {
   name: 'PopupLayout',
   mounted() {
@@ -25,14 +33,15 @@ export default {
   beforeDestroy() {
     document.querySelector('.body').classList.remove('blurry');
   },
-  data() {
-    return {
-      hidePopup: false,
-    };
-  },
   methods: {
     closePopup() {
-      this.hidePopup = true;
+      bus.$emit('close-popup');
+    },
+  },
+  props: {
+    title: {
+      type: String,
+      required: true,
     },
   },
 };

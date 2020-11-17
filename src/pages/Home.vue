@@ -7,7 +7,15 @@
       <button class="post-now-btn">
         <a href="forum.html">Go to main discussion !</a>
       </button>
-      <PostMini />
+      <PostMini
+        v-for="post in posts"
+        :key="post.id"
+        :title="post.title"
+        :content="post.content"
+        :img="post.img"
+        :author="post.author"
+        :reacts="post.reacts"
+      />
       <div class="news-feed"></div>
     </main>
     <Footer />
@@ -25,6 +33,46 @@ export default {
     Header,
     Footer,
     PostMini,
+  },
+  data() {
+    return {
+      posts: [
+        {
+          id: 1,
+          userId: 12,
+          author: {
+            name: 'Paul',
+            firstname: 'Logan',
+            avatar: '@/assets/cat-user.jpg',
+          },
+          title: 'coucou',
+          content: 'content',
+          img:
+            'https://media1.tenor.com/images/d2d817f9f1a14f3805e6a7487169e5ee/tenor.gif?itemid=16584815',
+          reacts: {
+            likes: 19,
+            dislikes: 2,
+          },
+        },
+        {
+          id: 2,
+          userId: 12,
+          author: {
+            name: 'Paul',
+            firstname: 'Logan',
+            avatar: '@/assets/cat-user.jpg',
+          },
+          title: 'coucou',
+          content: 'content',
+          img:
+            'https://media1.tenor.com/images/d2d817f9f1a14f3805e6a7487169e5ee/tenor.gif?itemid=16584815',
+          reacts: {
+            likes: 19,
+            dislikes: 2,
+          },
+        },
+      ],
+    };
   },
 };
 </script>
