@@ -16,16 +16,17 @@
         </ul>
       </nav>
     </div>
-    <div class="my-pp">
-      <a href="/profile"
-        ><img src="../assets/ciri.jpg" alt="my-profile-picture"
-      /></a>
-    </div>
+    <Mypp />
   </header>
 </template>
 
 <script>
+import Mypp from '@/components/Mypp';
+
 export default {
   name: 'Header',
+  components: {
+    Mypp,
+  },
 };
 </script>
