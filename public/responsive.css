@@ -1,0 +1,54 @@
+/* Media queries mobile devices from 320px to 480px */
+
+@media (max-width: 480px) {
+  #logo {
+    width: 200px;
+  }
+
+  h1 {
+    font-size: 20px;
+  }
+
+  h2 {
+    font-size: 15px;
+  }
+
+  footer,
+  footer #legals > a {
+    flex-flow: row wrap;
+    justify-content: space-evenly;
+  }
+
+  footer #legals > a,
+  footer > #contact-us > p {
+    font-size: 18px;
+    margin: 0px;
+  }
+
+  section.popup {
+    width: 240px;
+  }
+
+  .popup > .popup-form {
+    font-size: 14px;
+  }
+
+  .popup > .popup-form input {
+    width: 230px;
+  }
+
+  .popup > .popup-header > .popup-title {
+    flex-grow: 2;
+    font-size: 18px;
+  }
+
+  .popup > .popup-form > .popup-submit-btn > input {
+    font-size: 14px;
+    width: 80px;
+    height: 21px;
+  }
+
+  header .my-pp {
+    display: none;
+  }
+}
