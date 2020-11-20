@@ -48,3 +48,61 @@ export default {
   },
 };
 </script>
+
+<style lang="scss" scoped>
+/* Post content style */
+
+.content {
+  flex: 1 0 0;
+  padding: 15px;
+}
+
+.post-title {
+  font-size: 22px;
+  color: #2274a5;
+  align-self: flex-start;
+}
+
+.gif {
+  max-width: 400px;
+  width: 100%;
+}
+
+/* Reaction style */
+
+.reaction {
+  background-color: #ffd7d7;
+  display: flex;
+  flex-flow: column nowrap;
+  align-items: center;
+  justify-content: space-around;
+  width: 100px;
+  flex: 0 0 100px;
+}
+
+.reaction > .like {
+  display: flex;
+  flex-flow: row wrap;
+  align-items: center;
+}
+
+.reaction > .like i,
+.like-count {
+  padding-left: 8px;
+  color: #fd2d01;
+  font-size: 21px;
+}
+
+.reaction > .dislike {
+  display: flex;
+  flex-flow: row wrap;
+  align-items: center;
+}
+
+.reaction > .dislike i,
+.dislike-count {
+  padding-left: 8px;
+  color: #2274a5;
+  font-size: 21px;
+}
+</style>

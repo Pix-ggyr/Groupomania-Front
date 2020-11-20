@@ -15,16 +15,17 @@
       <button class="post-now-btn">
         <a href="forum.html">Go to main discussion !</a>
       </button>
-      <PostMini
-        v-for="post in posts"
-        :key="post.id"
-        :title="post.title"
-        :content="post.content"
-        :img="post.img"
-        :author="post.author"
-        :reacts="post.reacts"
-      />
-      <div class="news-feed"></div>
+      <div class="news-feed">
+        <PostMini
+          v-for="post in posts"
+          :key="post.id"
+          :title="post.title"
+          :content="post.content"
+          :img="post.img"
+          :author="post.author"
+          :reacts="post.reacts"
+        />
+      </div>
     </main>
     <Footer />
   </section>

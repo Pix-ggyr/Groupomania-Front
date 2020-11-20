@@ -6,16 +6,17 @@
       <button class="post-now-btn" @click.prevent.stop="showPopupPost()">
         <i class="fas fa-pencil-alt"> Create your post !</i>
       </button>
-      <div class="news-feed"></div>
-      <Post
-        v-for="post in posts"
-        :key="post.id"
-        :title="post.title"
-        :content="post.content"
-        :img="post.img"
-        :author="post.author"
-        :reacts="post.reacts"
-      />
+      <div class="news-feed">
+        <Post
+          v-for="post in posts"
+          :key="post.id"
+          :title="post.title"
+          :content="post.content"
+          :img="post.img"
+          :author="post.author"
+          :reacts="post.reacts"
+        />
+      </div>
     </main>
     <PopupPost v-if="displayPopupPost" />
     <Footer />
