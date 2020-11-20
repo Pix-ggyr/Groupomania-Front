@@ -53,6 +53,11 @@ export default {
   padding: 15px;
 }
 
+.post > .author > .user-pp {
+  width: 90px;
+  border-radius: 99px;
+}
+
 .post-title {
   font-size: 22px;
   color: #2274a5;
@@ -86,5 +91,49 @@ export default {
   padding-left: 8px;
   color: #2274a5;
   font-size: 18px;
+}
+
+@media (max-width: 480px) {
+  .post {
+    flex-direction: column;
+  }
+
+  .post > .author {
+    width: 100%;
+    flex-direction: row;
+    height: 50px;
+    padding: 10px;
+    flex: 0 0 50px;
+  }
+
+  .post > .author > .user-pp {
+    height: 50px;
+    width: 50px;
+  }
+
+  .post > .author > .user-name-feed {
+    padding-left: 10px;
+  }
+
+  .post > .reaction {
+    width: 100%;
+    flex-direction: row;
+    height: 35px;
+    flex: 0 0 35px;
+  }
+
+  .post > .content > h3,
+  .post-title {
+    margin-block-start: 0;
+    margin-block-end: 0;
+    margin-bottom: 10px;
+  }
+
+  .post > .content > p {
+    margin-block-start: 0;
+    margin-block-end: 0;
+    margin-bottom: 10px;
+    padding-top: 10px;
+  }
 }
 </style>

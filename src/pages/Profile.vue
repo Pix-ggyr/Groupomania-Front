@@ -67,6 +67,45 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+
+/* Profile style */
+
+.user-profile {
+  background-color: white;
+  box-shadow: rgba(90, 89, 89, 0.356) -3px 3px 0.2em;
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: center;
+  width: auto;
+  height: 100%;
+  border-radius: 10px;
+}
+
+.user-profile > #profile-pct {
+  padding: 20px;
+  display: flex;
+  flex-flow: column nowrap;
+  align-items: center;
+}
+
+.user-profile > #profile-pct > img {
+  padding: 20px;
+  width: 190px;
+  border-radius: 999px;
+}
+
+.user-profile > #user-infos {
+  display: flex;
+  flex-flow: column nowrap;
+  justify-content: center;
+  padding: 20px;
+  width: 450px;
+}
+
+.user-profile > #user-infos > #user-name {
+  font-size: 28px;
+}
+
 #description-edit {
   margin-top: 20px;
   width: 200px;
@@ -85,5 +124,34 @@ export default {
   height: 48px;
   color: white;
   background-color: #fd2d01;
+}
+
+@media (max-width: 775px) {
+  .user-profile {
+    flex-direction: column;
+    align-items: center;
+    width: 90%;
+    padding-bottom: 20px;
+  }
+
+  .user-profile > #profile-pct > img {
+    max-width: 150px;
+    width: 80%;
+  }
+
+  .user-profile > #user-infos {
+    max-width: 450px;
+    width: 100%;
+    align-items: center;
+    padding: 10px;
+  }
+
+  .user-profile > #user-infos > #user-name {
+    font-size: 21px;
+  }
+
+  .user-profile > #user-infos > #user-description {
+    padding: 10px;
+  }
 }
 </style>

@@ -10,7 +10,7 @@
       required
     /><br />
     <label for="create-post-content">Content :</label><br />
-    <div id="create-post-content"></div>
+    <editor-content :editor="editor" />
     <br />
     <div class="popup-submit-btn">
       <input type="button" value="Add an image" />
@@ -21,18 +21,25 @@
 
 <script>
 import PopupLayout from '@/components/PopupLayout';
-import { jQuery as $ } from 'jquery';
-// eslint-disable-next-line
-const jQuery = $;
-// eslint-disable-next-line
-import trumbowyg from 'trumbowyg';
+import { Editor, EditorContent } from 'tiptap';
 
 export default {
   components: {
     PopupLayout,
+    EditorContent,
+  },
+  data() {
+    return {
+      editor: null,
+    };
   },
   mounted() {
-    $('#create-post-content').trumbowyg();
+    this.editor = new Editor({
+      content: '<p>This is just a boring paragraph</p>',
+    });
+  },
+  beforeDestroy() {
+    this.editor.destroy();
   },
 };
 </script>

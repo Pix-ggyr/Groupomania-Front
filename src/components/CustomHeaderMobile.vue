@@ -1,9 +1,9 @@
 <template>
   <div>
-    <header>
+    <header class="mobile-header">
       <nav>
         <ul>
-          <li>
+          <li class="logo-mobile-header">
             <a href="home.html"
               ><img
                 src="../assets/icon-left-font-monochrome-white.png"
@@ -12,7 +12,7 @@
           </li>
           <li>
             <a>
-              logout
+              Logout
             </a>
           </li>
         </ul>
@@ -34,9 +34,37 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+header,
+.mobile-header {
+  height: 100px;
+  background-color: red;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+
+header,
+.mobile-header > nav,
 ul {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   list-style: none;
   margin: 0;
   left: 0;
+  margin-block-start: 0;
+  margin-block-end: 0;
+  padding-inline-start: 0;
+}
+
+li {
+  padding: 5px;
+}
+
+li,
+a {
+  font-size: 18px;
+  font-weight: 600;
+  color: white;
 }
 </style>
