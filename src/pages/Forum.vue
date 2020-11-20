@@ -4,7 +4,14 @@
     <main class="container">
       <h1>Let's share with the community</h1>
       <button class="post-now-btn" @click.prevent.stop="showPopupPost()">
-        <i class="fas fa-pencil-alt"> Create your post !</i>
+        <p>
+          <span
+            ><i
+              class="fas fa-pencil-alt"
+              style="padding-right: 10px;"
+            ></i></span
+          >Create your post !
+        </p>
       </button>
       <div class="news-feed">
         <Post

@@ -4,12 +4,18 @@
       <img class="user-pp" :src="author.avatar" />
       <p class="user-name-feed">{{ author.firstname }} {{ author.name }}</p>
     </div>
-    <div class="content">
-      <h3 class="post-title">{{ title }}</h3>
-      <img class="gif-mini" :src="img" />
-      <p>
-        {{ content }}
-      </p>
+    <div class="content-mini">
+      <div class="overview">
+        <div class="left-gif">
+          <img class="gif-mini" :src="img" />
+        </div>
+        <div class="title-text">
+          <h3 class="post-title">{{ title }}</h3>
+          <p>
+            {{ content }}
+          </p>
+        </div>
+      </div>
       <div class="feed-reaction">
         <div class="feed-like">
           <i class="fas fa-heart"></i>
@@ -48,9 +54,20 @@ export default {
 <style lang="scss" scoped>
 /* Post content style */
 
-.content {
+.content-mini {
   flex: 1 0 0;
   padding: 15px;
+}
+
+.content-mini > .overview {
+  display: flex;
+  flex-flow: row nowrap;
+  align-items: center;
+}
+
+.content-mini > .overview > .title-text {
+  display: flex;
+  flex-direction: column;
 }
 
 .post > .author > .user-pp {
@@ -58,14 +75,18 @@ export default {
   border-radius: 99px;
 }
 
-.post-title {
+.post-title,
+h3 {
+  margin-block-start: 0;
+  margin-block-end: 0;
   font-size: 22px;
   color: #2274a5;
   align-self: flex-start;
 }
 
 .gif-mini {
-  width: 150px;
+  width: 200px;
+  padding-right: 20px;
 }
 
 .feed-reaction {
@@ -104,6 +125,18 @@ export default {
     height: 50px;
     padding: 10px;
     flex: 0 0 50px;
+  }
+
+  .content-mini > .overview {
+    display: flex;
+    flex-flow: column nowrap;
+    align-items: center;
+  }
+
+  .gif-mini {
+    width: 100%;
+    padding-right: 0;
+    padding-bottom: 20px;
   }
 
   .post > .author > .user-pp {
