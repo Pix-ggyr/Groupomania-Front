@@ -10,7 +10,7 @@
       required
     /><br />
     <label for="create-post-content">Content :</label><br />
-    <editor-content :editor="editor" />
+    <Tiptap />
     <br />
     <div class="popup-submit-btn">
       <input type="button" value="Add an image" />
@@ -21,25 +21,12 @@
 
 <script>
 import PopupLayout from '@/components/PopupLayout';
-import { Editor, EditorContent } from 'tiptap';
+import Tiptap from '@/components/Tiptap';
 
 export default {
   components: {
     PopupLayout,
-    EditorContent,
-  },
-  data() {
-    return {
-      editor: null,
-    };
-  },
-  mounted() {
-    this.editor = new Editor({
-      content: '<p>This is just a boring paragraph</p>',
-    });
-  },
-  beforeDestroy() {
-    this.editor.destroy();
+    Tiptap,
   },
 };
 </script>
