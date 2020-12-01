@@ -15,13 +15,15 @@
           name="user-email"
           aria-label="user-email"
           placeholder="user@mail.com"
+          v-model="email"
         /><br />
         <label for="password">Enter your password</label><br />
         <input
-          type="text"
+          type="password"
           id="password"
           name="password"
           aria-label="password"
+          v-model="password"
         /><br />
         <input
           id="login-btn"
@@ -29,6 +31,7 @@
           name="submit"
           aria-label="submit"
           value="Login"
+          @click.prevent.stop="login()"
         />
       </form>
       <p>
@@ -47,6 +50,7 @@
 import bus from '@/bus';
 import Footer from '@/components/Footer';
 import PopupRegister from '@/components/PopupRegister';
+import axios from 'axios';
 
 export default {
   name: 'Login',
@@ -60,6 +64,8 @@ export default {
   data() {
     return {
       displayPopupRegister: false,
+      email: '',
+      password: '',
     };
   },
   methods: {
@@ -72,6 +78,15 @@ export default {
     closePopup() {
       if (!this.$el.classList.contains('blurry')) return;
       bus.$emit('close-popup');
+    },
+    async login() {
+      const res = await axios.post('http://localhost:3000/api/v1/user/login', {
+        email: this.email,
+        password: this.password,
+      });
+      const { accessToken, user } = res.data;
+      bus.$emit('logged-in', { accessToken, user });
+      window.location.pathname = '/';
     },
   },
 };

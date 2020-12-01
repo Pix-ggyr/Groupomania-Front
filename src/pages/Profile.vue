@@ -23,7 +23,9 @@
         </div>
       </div>
 
-      <button id="log-out" name="log-out" aria-label="log-out">Log out</button>
+      <a id="log-out" href="/logout" aria-label="log-out">
+        Log out
+      </a>
     </main>
     <PopupEditProfile v-if="displayEditProfilePopup" />
     <Footer />
@@ -67,7 +69,6 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-
 /* Profile style */
 
 .user-profile {

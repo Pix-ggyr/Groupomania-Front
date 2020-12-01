@@ -1,15 +1,18 @@
 <template>
-  <span class="red">{{ Jeanne }}</span>
+  <span class="red">{{ user.firstname }}</span>
 </template>
 
 <script>
 export default {
   name: 'HelloUser',
-  props: {
-    user: {
-      userId: { type: Number, required: true },
-      userFirstname: { type: String, required: true },
-    },
+  created() {
+    const user = JSON.parse(localStorage.getItem('user'));
+    this.user = user;
+  },
+  data() {
+    return {
+      user: {},
+    };
   },
 };
 </script>

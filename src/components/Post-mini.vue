@@ -1,12 +1,18 @@
 <template>
   <div class="post">
     <div class="author">
-      <img class="user-pp" :src="author.avatar" />
-      <p class="user-name-feed">{{ author.firstname }} {{ author.name }}</p>
+      <img
+        class="user-pp"
+        :src="
+          user.avatar ||
+            'https://png.pngtree.com/png-vector/20190710/ourlarge/pngtree-user-vector-avatar-png-image_1541962.jpg'
+        "
+      />
+      <p class="user-name-feed">{{ user.firstname }} {{ user.lastname }}</p>
     </div>
     <div class="content-mini">
       <div class="overview">
-        <div class="left-gif">
+        <div class="left-gif" v-if="img">
           <img class="gif-mini" :src="img" />
         </div>
         <div class="title-text">
@@ -31,22 +37,35 @@
 </template>
 
 <script>
+import axios from 'axios';
+
 export default {
   name: 'PostMini',
   props: {
     userId: { type: Number, required: true },
-    author: {
-      name: { type: String, required: true },
-      firstname: { type: String, required: true },
-      avatar: { type: String, required: true },
-    },
     title: { type: String, required: true },
     content: { type: String, required: false },
     img: { type: String, required: false },
-    reacts: {
-      likes: { type: Number, required: true },
-      dislikes: { type: Number, required: true },
-    },
+  },
+  async created() {
+    const users = await axios.get(
+      `http://localhost:3000/api/v1/user/${this.userId}/`,
+      {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem('accessToken')}`,
+        },
+      },
+    );
+    this.user = users.data;
+  },
+  data() {
+    return {
+      user: {},
+      reacts: {
+        likes: 0,
+        dislikes: 0,
+      },
+    };
   },
 };
 </script>

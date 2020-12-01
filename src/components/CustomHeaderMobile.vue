@@ -11,7 +11,7 @@
             /></a>
           </li>
           <li>
-            <a>
+            <a href="/logout">
               Logout
             </a>
           </li>
