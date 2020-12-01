@@ -1,6 +1,10 @@
 <template>
-  <div>
-    <editor-menu-bar :editor="editor" v-slot="{ commands, isActive }">
+  <div class="write-space">
+    <editor-menu-bar
+      :editor="editor"
+      v-slot="{ commands, isActive }"
+      class="editor-menu-bar"
+    >
       <div>
         <button
           :class="{ 'is-active': isActive.bold() }"
@@ -39,7 +43,7 @@
         </button>
       </div>
     </editor-menu-bar>
-    <editor-content :editor="editor" />
+    <editor-content :editor="editor" class="editor-content" />
   </div>
 </template>
 
@@ -88,3 +92,34 @@ export default {
   },
 };
 </script>
+
+<style lang="scss" scoped>
+.write-space {
+  display: flex;
+  flex-flow: column nowrap;
+  justify-content: stretch;
+  background-color: white;
+  border-bottom-left-radius: 5px;
+  border-bottom-right-radius: 5px;
+}
+
+.editor-menu-bar {
+  display: flex;
+  flex-direction: row;
+  justify-content: stretch;
+  width: 100%;
+}
+
+.editor-menu-bar > button {
+  color: black;
+  background-color: white;
+  border-radius: 0;
+  width: 100%;
+  box-shadow: 0 0 0;
+  border: solid 2px cornflowerblue;
+}
+
+.editor-content {
+  height: 150px;
+}
+</style>
