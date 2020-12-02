@@ -15,7 +15,7 @@
             value="Cancel"
             @click.prevent.stop="closePopup()"
           />
-          <input type="submit" value="Submit" />
+          <input type="submit" value="Submit" @click.prevent.stop="callback" />
         </div>
       </form>
     </section>
@@ -43,6 +43,7 @@ export default {
       type: String,
       required: true,
     },
+    callback: { type: Function, required: true },
   },
 };
 </script>

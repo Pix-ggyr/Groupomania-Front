@@ -1,35 +1,43 @@
 <template>
-  <div class="post">
-    <div class="author">
-      <img
-        class="user-pp"
-        :src="
-          user.avatar ||
-            'https://png.pngtree.com/png-vector/20190710/ourlarge/pngtree-user-vector-avatar-png-image_1541962.jpg'
-        "
-      />
-      <p class="user-name-feed">{{ user.firstname }} {{ user.lastname }}</p>
+  <div>
+    <div class="new-post">
+      <p>
+        <i class="fas fa-comment-alt"></i
+        ><span class="red">{{ fullname }}</span> has created a new post !
+      </p>
     </div>
-    <div class="content-mini">
-      <div class="overview">
-        <div class="left-gif" v-if="img">
-          <img class="gif-mini" :src="img" />
-        </div>
-        <div class="title-text">
-          <h3 class="post-title">{{ title }}</h3>
-          <p>
-            {{ content }}
-          </p>
-        </div>
+    <div class="post">
+      <div class="author">
+        <img
+          class="user-pp"
+          :src="
+            user.avatar ||
+              'https://png.pngtree.com/png-vector/20190710/ourlarge/pngtree-user-vector-avatar-png-image_1541962.jpg'
+          "
+        />
+        <p class="user-name-feed">{{ user.firstname }} {{ user.lastname }}</p>
       </div>
-      <div class="feed-reaction">
-        <div class="feed-like">
-          <i class="fas fa-heart"></i>
-          <span class="feed-like-count">{{ reacts.likes }}</span>
+      <div class="content-mini">
+        <div class="overview">
+          <div class="left-gif" v-if="post.image">
+            <img class="gif-mini" :src="post.image" />
+          </div>
+          <div class="title-text">
+            <h3 class="post-title">{{ post.title }}</h3>
+            <p>
+              {{ post.content }}
+            </p>
+          </div>
         </div>
-        <div class="feed-dislike">
-          <i class="fas fa-heart-broken"></i>
-          <span class="feed-dislike-count">{{ reacts.dislikes }}</span>
+        <div class="feed-reaction">
+          <div class="feed-like">
+            <i class="fas fa-heart"></i>
+            <span class="feed-like-count">{{ likes }}</span>
+          </div>
+          <div class="feed-dislike">
+            <i class="fas fa-heart-broken"></i>
+            <span class="feed-dislike-count">{{ dislikes }}</span>
+          </div>
         </div>
       </div>
     </div>
@@ -42,29 +50,56 @@ import axios from 'axios';
 export default {
   name: 'PostMini',
   props: {
-    userId: { type: Number, required: true },
-    title: { type: String, required: true },
-    content: { type: String, required: false },
-    img: { type: String, required: false },
+    activity: {
+      type: Object,
+      required: true,
+    },
   },
   async created() {
-    const users = await axios.get(
-      `http://localhost:3000/api/v1/user/${this.userId}/`,
+    const post = await axios.get(
+      `http://localhost:3000/api/v1/post/${this.activity.postId}`,
       {
         headers: {
           Authorization: `Bearer ${localStorage.getItem('accessToken')}`,
         },
       },
     );
-    this.user = users.data;
+    this.post = post.data;
+    const user = await axios.get(
+      `http://localhost:3000/api/v1/user/${this.post.userId}`,
+      {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem('accessToken')}`,
+        },
+      },
+    );
+    this.user = user.data;
+    const reacts = await axios.get(
+      `http://localhost:3000/api/v1/react?postId=${this.post.id}`,
+      {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem('accessToken')}`,
+        },
+      },
+    );
+    this.reacts = reacts.data;
+  },
+  computed: {
+    fullname() {
+      return `${this.user.firstname} ${this.user.lastname}`;
+    },
+    likes() {
+      return this.reacts.filter((react) => react.type === 'like').length;
+    },
+    dislikes() {
+      return this.reacts.filter((react) => react.type === 'dislike').length;
+    },
   },
   data() {
     return {
       user: {},
-      reacts: {
-        likes: 0,
-        dislikes: 0,
-      },
+      reacts: [],
+      post: {},
     };
   },
 };
@@ -131,6 +166,10 @@ h3 {
   padding-left: 8px;
   color: #2274a5;
   font-size: 18px;
+}
+
+.fa-comment-alt {
+  margin-right: 3px;
 }
 
 @media (max-width: 480px) {

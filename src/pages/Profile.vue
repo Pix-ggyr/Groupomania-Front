@@ -5,14 +5,19 @@
       <h1>Your profile</h1>
       <div class="user-profile">
         <div id="profile-pct">
-          <img src="../assets/ciri.jpg" alt="user-profile-picture" />
+          <img
+            :src="
+              user.avatar ||
+                'https://png.pngtree.com/png-vector/20190710/ourlarge/pngtree-user-vector-avatar-png-image_1541962.jpg'
+            "
+            alt="user-profile-picture"
+          />
         </div>
         <div id="user-infos">
-          <h2 id="user-name">Jeanne BOND</h2>
-          <p id="user-mail">jeanne.bond@mail.com</p>
+          <h2 id="user-name">{{ fullname }}</h2>
+          <p id="user-mail">{{ user.email }}</p>
           <p id="user-description">
-            Hello ! My name is Jeanne Bond and come from Bayonne. I'm 22 years
-            old and I'm currently working in the human resources of Groupomania.
+            {{ user.bio }}
           </p>
           <button
             id="description-edit"
@@ -47,11 +52,17 @@ export default {
   },
   created() {
     bus.$on('close-popup', this.closeEditProfilePopup);
+    this.user = JSON.parse(localStorage.getItem('user'));
   },
   data() {
     return {
       displayEditProfilePopup: false,
     };
+  },
+  computed: {
+    fullname() {
+      return `${this.user.firstname} ${this.user.lastname}`;
+    },
   },
   methods: {
     showEditProfilePopup() {
@@ -124,7 +135,12 @@ export default {
   width: 120px;
   height: 48px;
   color: white;
+  text-align: center;
+  line-height: 48px;
+  text-decoration: none;
   background-color: #fd2d01;
+  border-radius: 3px;
+  box-shadow: rgba(0, 0, 0, 0.356) -2px 2px 0.1em;
 }
 
 @media (max-width: 775px) {

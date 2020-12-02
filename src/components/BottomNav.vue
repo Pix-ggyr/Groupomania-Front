@@ -2,17 +2,22 @@
   <nav class="bottom-header">
     <ul>
       <li>
-        <img class="navicon" src="@/assets/home.png" /><a href="/home">Home</a>
+        <a href="/home">
+          <img class="navicon" src="@/assets/home.png" />
+          Home
+        </a>
       </li>
       <li>
-        <img class="navicon" src="@/assets/forum.png" /><a href="/forum"
-          >Forum</a
-        >
+        <a href="/forum">
+          <img class="navicon" src="@/assets/forum.png" />
+          Forum
+        </a>
       </li>
       <li>
-        <img class="navicon" src="@/assets/profile.png" /><a href="/profile"
-          >Profile</a
-        >
+        <a href="/profile">
+          <img class="navicon" src="@/assets/profile.png" />
+          Profile
+        </a>
       </li>
     </ul>
   </nav>
@@ -27,7 +32,7 @@ export default {
   },
   beforeDestroy() {
     const body = document.querySelector('body');
-    body.style['padding-bottom'] = '80px';
+    body.style['padding-bottom'] = '0';
   },
 };
 </script>
@@ -45,7 +50,7 @@ export default {
   bottom: 0;
   left: 0;
   position: fixed;
-  background-color: #fd2d01;
+  background-color: rgb(19, 93, 230);
   width: 100%;
   height: 80px;
 }
@@ -66,19 +71,19 @@ ul {
 }
 
 ul li {
-  display: flex;
-  flex-flow: column nowrap;
-  align-items: center;
   padding: 10px;
 }
 
 ul li > a {
+  display: flex;
+  flex-flow: column nowrap;
+  align-items: center;
   text-decoration: none;
   color: white;
   font-weight: 700;
 }
 
-ul li > .navicon {
+ul li a > .navicon {
   height: 25px;
   width: 25px;
   margin-bottom: 5px;

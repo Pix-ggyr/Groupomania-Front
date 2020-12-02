@@ -3,47 +3,80 @@
     <div class="author">
       <img
         class="user-pp"
-        :src="author.avatar"
+        :src="
+          user.avatar ||
+            'https://png.pngtree.com/png-vector/20190710/ourlarge/pngtree-user-vector-avatar-png-image_1541962.jpg'
+        "
         alt="user-name-profile-picture"
       />
-      <p class="user-name-feed">{{ author.firstname }} {{ author.name }}</p>
+      <p class="user-name-feed">{{ fullname }}</p>
     </div>
     <div class="content">
-      <h3 class="post-title">{{ title }}</h3>
-      <img class="gif" :src="img" />
+      <h3 class="post-title">{{ post.title }}</h3>
+      <img v-if="post.image" class="gif" :src="post.image" />
       <p>
-        {{ content }}
+        {{ post.content }}
       </p>
     </div>
     <div class="reaction">
       <div class="like">
         <i class="fas fa-heart"></i>
-        <span class="like-count">{{ reacts.likes }}</span>
+        <span class="like-count">{{ likes }}</span>
       </div>
       <div class="dislike">
         <i class="fas fa-heart-broken"></i>
-        <span class="dislike-count">{{ reacts.dislikes }}</span>
+        <span class="dislike-count">{{ dislikes }}</span>
       </div>
     </div>
   </div>
 </template>
 
 <script>
+import axios from 'axios';
+
 export default {
   name: 'Post',
   props: {
-    userId: { type: Number, required: true },
-    author: {
-      name: { type: String, required: true },
-      firstname: { type: String, required: true },
-      avatar: { type: String, required: true },
+    post: {
+      type: Object,
+      required: true,
     },
-    title: { type: String, required: true },
-    content: { type: String, required: false },
-    img: { type: String, required: false },
-    reacts: {
-      likes: { type: Number, required: true },
-      dislikes: { type: Number, required: true },
+  },
+  data() {
+    return {
+      user: {},
+      reacts: [],
+    };
+  },
+  async created() {
+    const user = await axios.get(
+      `http://localhost:3000/api/v1/user/${this.post.userId}`,
+      {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem('accessToken')}`,
+        },
+      },
+    );
+    this.user = user.data;
+    const reacts = await axios.get(
+      `http://localhost:3000/api/v1/react?postId=${this.post.id}`,
+      {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem('accessToken')}`,
+        },
+      },
+    );
+    this.reacts = reacts.data;
+  },
+  computed: {
+    fullname() {
+      return `${this.user.firstname} ${this.user.lastname}`;
+    },
+    likes() {
+      return this.reacts.filter((react) => react.type === 'like').length;
+    },
+    dislikes() {
+      return this.reacts.filter((react) => react.type === 'dislike').length;
     },
   },
 };

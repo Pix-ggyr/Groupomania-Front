@@ -4,11 +4,7 @@
     <main class="container">
       <h1>
         Welcome
-        <HelloUser
-          v-for="hello in hellos"
-          :key="hello.id"
-          :userFirstName="hello.userFirstName"
-        />
+        <HelloUser />
         ! How are you today ?
       </h1>
       <h2>Here you'll find the latest news</h2>
@@ -16,14 +12,13 @@
         <a href="forum.html">Go to main discussion !</a>
       </button>
       <div class="news-feed">
-        <PostMini
-          v-for="post in posts"
-          :key="post.id"
-          :userId="post.userId"
-          :title="post.title"
-          :content="post.content"
-          :img="post.img"
-        />
+        <div
+          class="new-post"
+          v-for="activity in activities"
+          :key="activity.id"
+          :is="activityComponent(activity)"
+          :activity="activity"
+        ></div>
       </div>
     </main>
     <Footer />
@@ -34,6 +29,7 @@
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import PostMini from '@/components/Post-mini';
+import BasicReaction from '@/components/BasicReaction';
 import HelloUser from '@/components/HelloUser';
 import axios from 'axios';
 
@@ -43,20 +39,29 @@ export default {
     Header,
     Footer,
     PostMini,
+    BasicReaction,
     HelloUser,
+  },
+  methods: {
+    activityComponent(activity) {
+      return activity.type === 'post' ? PostMini : BasicReaction;
+    },
   },
   data() {
     return {
-      posts: [],
+      activities: [],
     };
   },
   async created() {
-    const posts = await axios.get('http://localhost:3000/api/v1/post/', {
-      headers: {
-        Authorization: `Bearer ${localStorage.getItem('accessToken')}`,
+    const activities = await axios.get(
+      'http://localhost:3000/api/v1/activity/latest',
+      {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem('accessToken')}`,
+        },
       },
-    });
-    this.posts = posts.data;
+    );
+    this.activities = activities.data;
   },
 };
 </script>

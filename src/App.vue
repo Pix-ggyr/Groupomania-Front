@@ -34,6 +34,7 @@ export default {
           return false;
         }
       } else if (this.accessToken) {
+        window.location.pathname = '/';
         return false;
       }
       return destRoute.component;
