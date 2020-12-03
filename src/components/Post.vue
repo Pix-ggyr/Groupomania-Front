@@ -19,11 +19,11 @@
       </p>
     </div>
     <div class="reaction">
-      <div class="like">
+      <div class="like" @click.prevent.stop="toggleLike()">
         <i class="fas fa-heart"></i>
         <span class="like-count">{{ likes }}</span>
       </div>
-      <div class="dislike">
+      <div class="dislike" @click.prevent.stop="toggleDislike()">
         <i class="fas fa-heart-broken"></i>
         <span class="dislike-count">{{ dislikes }}</span>
       </div>
@@ -58,15 +58,63 @@ export default {
       },
     );
     this.user = user.data;
-    const reacts = await axios.get(
-      `http://localhost:3000/api/v1/react?postId=${this.post.id}`,
-      {
-        headers: {
-          Authorization: `Bearer ${localStorage.getItem('accessToken')}`,
+    this.fetchReactions();
+  },
+  methods: {
+    async fetchReactions() {
+      const reacts = await axios.get(
+        `http://localhost:3000/api/v1/react?postId=${this.post.id}`,
+        {
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem('accessToken')}`,
+          },
         },
-      },
-    );
-    this.reacts = reacts.data;
+      );
+      this.reacts = reacts.data;
+    },
+
+    toggleLike() {
+      this.toggleReaction('like');
+    },
+    toggleDislike() {
+      this.toggleReaction('dislike');
+    },
+    toggleReaction(type) {
+      // eslint-disable-next-line no-unused-vars
+      axios
+        .post(
+          'http://localhost:3000/api/v1/react',
+          {
+            postId: this.post.id,
+            type,
+          },
+          {
+            headers: {
+              Authorization: `Bearer ${localStorage.getItem('accessToken')}`,
+            },
+          },
+        )
+        .then(() => {
+          this.fetchReactions();
+        })
+        .catch(async (error) => {
+          if (error.message === 'Request failed with status code 409') {
+            const user = JSON.parse(localStorage.getItem('user'));
+            // eslint-disable-next-line no-unused-vars
+            const deleteReact = await axios.delete(
+              `http://localhost:3000/api/v1/react?userId=${user.id}&postId=${this.post.id}&type=${type}`,
+              {
+                headers: {
+                  Authorization: `Bearer ${localStorage.getItem(
+                    'accessToken',
+                  )}`,
+                },
+              },
+            );
+            this.fetchReactions();
+          }
+        });
+    },
   },
   computed: {
     fullname() {
