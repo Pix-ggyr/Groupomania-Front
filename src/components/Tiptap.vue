@@ -8,42 +8,42 @@
       <div>
         <button
           :class="{ 'is-active': isActive.bold() }"
-          @click="commands.bold"
+          @click.stop.prevent="commands.bold"
         >
           B
         </button>
         <button
           :class="{ 'is-active': isActive.italic() }"
-          @click="commands.italic"
+          @click.stop.prevent="commands.italic"
         >
           I</button
         ><button
           :class="{ 'is-active': isActive.underline() }"
-          @click="commands.underline"
+          @click.stop.prevent="commands.underline"
         >
           U
         </button>
         <button
           :class="{ 'is-active': isActive.blockquote() }"
-          @click="commands.blockquote"
+          @click.stop.prevent="commands.blockquote"
         >
           " "
         </button>
         <button
           :class="{ 'is-active': isActive.strike() }"
-          @click="commands.strike"
+          @click.stop.prevent="commands.strike"
         >
           $
         </button>
         <button
           :class="{ 'is-active': isActive.link() }"
-          @click="commands.link"
+          @click.stop.prevent="commands.link"
         >
           url
         </button>
       </div>
     </editor-menu-bar>
-    <editor-content :editor="editor" class="editor-content" />
+    <editor-content :editor="editor" class="editor-content" v-model="content" />
   </div>
 </template>
 
@@ -68,6 +68,7 @@ export default {
     EditorMenuBar,
     EditorContent,
   },
+  props: ['content'],
   data() {
     return {
       editor: new Editor({
@@ -84,8 +85,15 @@ export default {
           new History(),
         ],
         content: '',
+
+        onUpdate: ({ getHTML }) => {
+          this.$emit('input', getHTML());
+        },
       }),
     };
+  },
+  created() {
+    this.editor.setContent(this.content);
   },
   beforeDestroy() {
     this.editor.destroy();

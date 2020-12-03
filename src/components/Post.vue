@@ -14,9 +14,7 @@
     <div class="content">
       <h3 class="post-title">{{ post.title }}</h3>
       <img v-if="post.image" class="gif" :src="post.image" />
-      <p>
-        {{ post.content }}
-      </p>
+      <p v-html="post.content"></p>
     </div>
     <div class="reaction">
       <div class="like" @click.prevent.stop="toggleLike()">

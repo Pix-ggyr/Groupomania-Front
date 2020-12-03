@@ -46,12 +46,8 @@ export default {
   },
   async created() {
     bus.$on('close-popup', this.closePopupPost);
-    const posts = await axios.get('http://localhost:3000/api/v1/post', {
-      headers: {
-        Authorization: `Bearer ${localStorage.getItem('accessToken')}`,
-      },
-    });
-    this.posts = posts.data;
+    bus.$on('posted', this.fetchPost);
+    this.fetchPost();
   },
   methods: {
     showPopupPost() {
@@ -63,6 +59,14 @@ export default {
     closePopup() {
       if (!this.$el.classList.contains('blurry')) return;
       bus.$emit('close-popup');
+    },
+    async fetchPost() {
+      const posts = await axios.get('http://localhost:3000/api/v1/post', {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem('accessToken')}`,
+        },
+      });
+      this.posts = posts.data;
     },
   },
 };
