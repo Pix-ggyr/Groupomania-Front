@@ -2,12 +2,12 @@
   <div class="post">
     <div class="author">
       <img
-        class="user-pp"
+        class="user-avatar"
         :src="
           user.avatar ||
-            'https://png.pngtree.com/png-vector/20190710/ourlarge/pngtree-user-vector-avatar-png-image_1541962.jpg'
+            'https://t3.ftcdn.net/jpg/01/18/01/98/360_F_118019822_6CKXP6rXmVhDOzbXZlLqEM2ya4HhYzSV.jpg'
         "
-        alt="user-name-profile-picture"
+        alt="profile-picture"
       />
       <p class="user-name-feed">{{ fullname }}</p>
     </div>
@@ -136,8 +136,10 @@ export default {
   padding: 15px;
 }
 
-.post > .author > .user-pp {
+.post > .author > .user-avatar {
   width: 90px;
+  height: 90px;
+  object-fit: cover;
   border-radius: 99px;
 }
 
@@ -205,9 +207,10 @@ export default {
     flex: 0 0 50px;
   }
 
-  .post > .author > .user-pp {
+  .post > .author > .user-avatar {
     height: 50px;
     width: 50px;
+    object-fit: cover;
   }
 
   .post > .author > .user-name-feed {

@@ -8,7 +8,7 @@
           <img
             :src="
               user.avatar ||
-                'https://png.pngtree.com/png-vector/20190710/ourlarge/pngtree-user-vector-avatar-png-image_1541962.jpg'
+                'https://t3.ftcdn.net/jpg/01/18/01/98/360_F_118019822_6CKXP6rXmVhDOzbXZlLqEM2ya4HhYzSV.jpg'
             "
             alt="user-profile-picture"
           />
@@ -70,6 +70,7 @@ export default {
     },
     closeEditProfilePopup() {
       this.displayEditProfilePopup = false;
+      window.location.pathname = '/profile';
     },
     closePopup() {
       if (!this.$el.classList.contains('blurry')) return;
@@ -103,6 +104,8 @@ export default {
 .user-profile > #profile-pct > img {
   padding: 20px;
   width: 190px;
+  height: 190px;
+  object-fit: cover;
   border-radius: 999px;
 }
 

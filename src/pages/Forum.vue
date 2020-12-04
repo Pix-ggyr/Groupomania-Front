@@ -55,6 +55,7 @@ export default {
     },
     closePopupPost() {
       this.displayPopupPost = false;
+      this.fetchPost();
     },
     closePopup() {
       if (!this.$el.classList.contains('blurry')) return;

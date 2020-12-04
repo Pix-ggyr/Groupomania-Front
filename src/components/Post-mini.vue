@@ -24,9 +24,7 @@
           </div>
           <div class="title-text">
             <h3 class="post-title">{{ post.title }}</h3>
-            <p>
-              {{ post.content }}
-            </p>
+            <p v-html="post.content"></p>
           </div>
         </div>
         <div class="feed-reaction">
@@ -126,6 +124,8 @@ export default {
 
 .post > .author > .user-pp {
   width: 90px;
+  height: 90px;
+  object-fit: cover;
   border-radius: 99px;
 }
 
@@ -170,6 +170,10 @@ h3 {
 
 .fa-comment-alt {
   margin-right: 3px;
+}
+
+.fas {
+  color: darkblue;
 }
 
 @media (max-width: 480px) {

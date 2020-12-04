@@ -1,59 +1,97 @@
 <template>
-  <div class="write-space">
-    <editor-menu-bar
-      :editor="editor"
-      v-slot="{ commands, isActive }"
-      class="editor-menu-bar"
-    >
-      <div>
+  <div class="editor">
+    <editor-menu-bar :editor="editor" v-slot="{ commands, isActive }">
+      <div class="menubar">
         <button
+          class="menubar__button"
           :class="{ 'is-active': isActive.bold() }"
-          @click.stop.prevent="commands.bold"
+          @click="commands.bold"
         >
-          B
+          <i class="fas fa-bold"></i>
         </button>
+
         <button
+          class="menubar__button"
           :class="{ 'is-active': isActive.italic() }"
-          @click.stop.prevent="commands.italic"
+          @click="commands.italic"
         >
-          I</button
-        ><button
-          :class="{ 'is-active': isActive.underline() }"
-          @click.stop.prevent="commands.underline"
-        >
-          U
+          <i class="fas fa-italic"></i>
         </button>
+
         <button
-          :class="{ 'is-active': isActive.blockquote() }"
-          @click.stop.prevent="commands.blockquote"
-        >
-          " "
-        </button>
-        <button
+          class="menubar__button"
           :class="{ 'is-active': isActive.strike() }"
-          @click.stop.prevent="commands.strike"
+          @click="commands.strike"
         >
-          $
+          <i class="fas fa-strikethrough"></i>
         </button>
+
         <button
-          :class="{ 'is-active': isActive.link() }"
-          @click.stop.prevent="commands.link"
+          class="menubar__button"
+          :class="{ 'is-active': isActive.underline() }"
+          @click="commands.underline"
         >
-          url
+          <i class="fas fa-underline"></i>
+        </button>
+
+        <button
+          class="menubar__button"
+          :class="{ 'is-active': isActive.heading({ level: 1 }) }"
+          @click="commands.heading({ level: 1 })"
+        >
+          h1
+        </button>
+
+        <button
+          class="menubar__button"
+          :class="{ 'is-active': isActive.heading({ level: 2 }) }"
+          @click="commands.heading({ level: 2 })"
+        >
+          h2
+        </button>
+
+        <button
+          class="menubar__button"
+          :class="{ 'is-active': isActive.heading({ level: 3 }) }"
+          @click="commands.heading({ level: 3 })"
+        >
+          h3
+        </button>
+
+        <button
+          class="menubar__button"
+          :class="{ 'is-active': isActive.bullet_list() }"
+          @click="commands.bullet_list"
+        >
+          <i class="fas fa-list-ul"></i>
+        </button>
+
+        <button
+          class="menubar__button"
+          :class="{ 'is-active': isActive.ordered_list() }"
+          @click="commands.ordered_list"
+        >
+          <i class="fas fa-list-ol"></i>
         </button>
       </div>
     </editor-menu-bar>
-    <editor-content :editor="editor" class="editor-content" v-model="content" />
+
+    <editor-content
+      class="editor__content"
+      :editor="editor"
+      v-model="content"
+    />
   </div>
 </template>
 
 <script>
 import { Editor, EditorContent, EditorMenuBar } from 'tiptap';
 import {
-  Blockquote,
+  BulletList,
+  HardBreak,
+  Heading,
   ListItem,
   OrderedList,
-  BulletList,
   Bold,
   Italic,
   Link,
@@ -73,13 +111,14 @@ export default {
     return {
       editor: new Editor({
         extensions: [
-          new Blockquote(),
-          new ListItem(),
           new BulletList(),
+          new HardBreak(),
+          new Heading({ levels: [1, 2, 3] }),
+          new ListItem(),
           new OrderedList(),
+          new Link(),
           new Bold(),
           new Italic(),
-          new Link(),
           new Strike(),
           new Underline(),
           new History(),
@@ -102,32 +141,49 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.write-space {
-  display: flex;
-  flex-flow: column nowrap;
-  justify-content: stretch;
+// .write-space {
+//   display: flex;
+//   flex-flow: column nowrap;
+//   justify-content: stretch;
+//   background-color: white;
+//   border-bottom-left-radius: 5px;
+//   border-bottom-right-radius: 5px;
+// }
+
+.editor__content {
+  line-height: 21px;
   background-color: white;
-  border-bottom-left-radius: 5px;
-  border-bottom-right-radius: 5px;
+  height: 100%;
+  border-radius: 2px;
 }
 
-.editor-menu-bar {
+.menubar {
+  margin-bottom: 1rem;
+  transition: visibility 0.2s 0.4s, opacity 0.2s 0.4s;
   display: flex;
-  flex-direction: row;
-  justify-content: stretch;
+  flex-flow: row wrap;
+  justify-content: center;
   width: 100%;
-}
 
-.editor-menu-bar > button {
-  color: black;
-  background-color: white;
-  border-radius: 0;
-  width: 100%;
-  box-shadow: 0 0 0;
-  border: solid 2px cornflowerblue;
-}
+  &__button {
+    font-weight: bold;
+    width: 40px;
+    background: white;
+    border: 0;
+    color: darkblue;
+    padding: 2px;
+    margin-right: 3px;
+    margin-bottom: 3px;
+    border-radius: 3px;
+    cursor: pointer;
 
-.editor-content {
-  height: 150px;
+    &:hover {
+      background-color: lightgrey;
+    }
+
+    &.is-active {
+      background-color: lightgrey;
+    }
+  }
 }
 </style>

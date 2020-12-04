@@ -31,6 +31,7 @@ import Footer from '@/components/Footer';
 import PostMini from '@/components/Post-mini';
 import BasicReaction from '@/components/BasicReaction';
 import HelloUser from '@/components/HelloUser';
+// import bus from '@/bus';
 import axios from 'axios';
 
 export default {
@@ -53,6 +54,8 @@ export default {
     };
   },
   async created() {
+    // eslint-disable-next-line no-undef
+    // bus.$on('imput', getHTML());
     const activities = await axios.get(
       'http://localhost:3000/api/v1/activity/latest',
       {

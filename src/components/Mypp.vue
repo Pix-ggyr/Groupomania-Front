@@ -16,7 +16,7 @@ export default {
     const user = JSON.parse(localStorage.getItem('user'));
     // eslint-disable-next-line
     const defaultPp =
-      'https://png.pngtree.com/png-vector/20190710/ourlarge/pngtree-user-vector-avatar-png-image_1541962.jpg';
+      'https://t3.ftcdn.net/jpg/01/18/01/98/360_F_118019822_6CKXP6rXmVhDOzbXZlLqEM2ya4HhYzSV.jpg';
     this.avatar = user.avatar || defaultPp;
   },
 };

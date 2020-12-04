@@ -1,4 +1,4 @@
-<template>
+²<template>
   <portal to="popup">
     <section class="popup">
       <header class="popup-header">

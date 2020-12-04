@@ -1,6 +1,6 @@
 <template>
   <PopupLayout title="Create your post !" :callback="post">
-    <label for="post-title">Your title* :</label><br />
+    <label for="post-title">Your title (required) :</label>
     <input
       v-model="title"
       type="text"
@@ -9,14 +9,18 @@
       aria-label="post-title"
       placeholder="Give your post a title"
       required
-    /><br />
-    <label for="create-post-content">Content :</label><br />
-    <Tiptap :content="content" @input="content = $event" />
-    <br />
-    <div class="popup-submit-btn">
-      <input type="button" value="Add an image" v-model="image" />
-      <button><i class="far fa-trash-alt"></i></button>
+    />
+    <label for="create-post-content">Your text :</label>
+    <div class="tiptap-editor">
+      <Tiptap :content="content" @input="content = $event" />
     </div>
+    <label for="add-gif-to-post">Your gif: </label>
+    <input
+      class="gif-url"
+      type="text"
+      placeholder="Paste gif link here"
+      v-model="image"
+    />
   </PopupLayout>
 </template>
 
@@ -40,7 +44,7 @@ export default {
   },
   methods: {
     async post() {
-      const res = await axios.post(
+      await axios.post(
         'http://localhost:3000/api/v1/post',
         {
           title: this.title,
@@ -53,10 +57,15 @@ export default {
           },
         },
       );
-      // eslint-disable-next-line no-unused-vars
-      const post = res.data;
       bus.$emit('posted');
+      bus.$emit('close-popup');
     },
   },
 };
 </script>
+
+<style lang="scss" scoped>
+input.gif-url {
+  margin-bottom: 20px;
+}
+</style>

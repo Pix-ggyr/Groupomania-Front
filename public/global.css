@@ -96,6 +96,7 @@ header > .my-pp img {
   margin: 20px;
   height: 95px;
   width: 95px;
+  object-fit: cover;
   border-radius: 99px;
 }
 
@@ -210,6 +211,8 @@ button {
 
 .popup > .popup-form label {
   color: white;
+  padding-top: 15px;
+  padding-bottom: 5px;
 }
 
 .popup > .popup-form input {

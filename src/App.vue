@@ -43,6 +43,7 @@ export default {
   created() {
     bus.$on('logged-in', this.logUserIn);
     bus.$on('logout', this.logUserOut);
+    bus.$on('updated-user', this.updateUser);
   },
   methods: {
     logUserIn({ accessToken, user }) {
@@ -51,6 +52,9 @@ export default {
     },
     logUserOut() {
       this.accessToken = null;
+    },
+    updateUser(updatedUser) {
+      localStorage.setItem('user', JSON.stringify(updatedUser));
     },
   },
 };
