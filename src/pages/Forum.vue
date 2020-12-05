@@ -1,5 +1,5 @@
 <template>
-  <section class="body" @click="closePopup">
+  <section>
     <Header />
     <main class="container">
       <h1>Let's share with the community</h1>
@@ -46,21 +46,35 @@ export default {
   },
   async created() {
     bus.$on('close-popup', this.closePopupPost);
+    bus.$on('close-popup', this.closePopupEdit);
     bus.$on('posted', this.fetchPost);
+    bus.$on('updated-post', this.fetchPost);
     this.fetchPost();
   },
   methods: {
     showPopupPost() {
       this.displayPopupPost = true;
     },
+
     closePopupPost() {
       this.displayPopupPost = false;
       this.fetchPost();
     },
+
+    showPopupEdit() {
+      this.displayPopupEdit = true;
+    },
+
+    closePopupEdit() {
+      this.displayPopupEdit = false;
+      window.location.pathname = '/forum';
+    },
+
     closePopup() {
       if (!this.$el.classList.contains('blurry')) return;
       bus.$emit('close-popup');
     },
+
     async fetchPost() {
       const posts = await axios.get('http://localhost:3000/api/v1/post', {
         headers: {

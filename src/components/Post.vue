@@ -1,38 +1,51 @@
 <template>
-  <div class="post">
-    <div class="author">
-      <img
-        class="user-avatar"
-        :src="
-          user.avatar ||
-            'https://t3.ftcdn.net/jpg/01/18/01/98/360_F_118019822_6CKXP6rXmVhDOzbXZlLqEM2ya4HhYzSV.jpg'
-        "
-        alt="profile-picture"
-      />
-      <p class="user-name-feed">{{ fullname }}</p>
-    </div>
-    <div class="content">
-      <h3 class="post-title">{{ post.title }}</h3>
-      <img v-if="post.image" class="gif" :src="post.image" />
-      <p v-html="post.content"></p>
-    </div>
-    <div class="reaction">
-      <div class="like" @click.prevent.stop="toggleLike()">
-        <i class="fas fa-heart"></i>
-        <span class="like-count">{{ likes }}</span>
+  <section class="body" @click.prevent.stop="closePopup">
+    <div class="post">
+      <div class="author">
+        <img
+          class="user-avatar"
+          :src="
+            user.avatar ||
+              'https://t3.ftcdn.net/jpg/01/18/01/98/360_F_118019822_6CKXP6rXmVhDOzbXZlLqEM2ya4HhYzSV.jpg'
+          "
+          alt="profile-picture"
+        />
+        <p class="user-name-feed">{{ fullname }}</p>
       </div>
-      <div class="dislike" @click.prevent.stop="toggleDislike()">
-        <i class="fas fa-heart-broken"></i>
-        <span class="dislike-count">{{ dislikes }}</span>
+      <div class="content">
+        <h3 class="post-title">{{ post.title }}</h3>
+        <img v-if="post.image" class="gif" :src="post.image" />
+        <p v-html="post.content"></p>
+      </div>
+      <div class="edit-post">
+        <button @click.prevent.stop="showPopupEdit()">
+          <i class="fas fa-edit"></i>
+        </button>
+      </div>
+      <div class="reaction">
+        <div class="like" @click.prevent.stop="toggleLike()">
+          <i class="fas fa-heart"></i>
+          <span class="like-count">{{ likes }}</span>
+        </div>
+        <div class="dislike" @click.prevent.stop="toggleDislike()">
+          <i class="fas fa-heart-broken"></i>
+          <span class="dislike-count">{{ dislikes }}</span>
+        </div>
       </div>
     </div>
-  </div>
+    <PopupEditPost v-if="displayPopupEdit" />
+  </section>
 </template>
 
 <script>
+import PopupEditPost from '@/components/PopupEditPost';
 import axios from 'axios';
+import bus from '@/bus';
 
 export default {
+  components: {
+    PopupEditPost,
+  },
   name: 'Post',
   props: {
     post: {
@@ -42,6 +55,7 @@ export default {
   },
   data() {
     return {
+      displayPopupEdit: false,
       user: {},
       reacts: [],
     };
@@ -59,6 +73,20 @@ export default {
     this.fetchReactions();
   },
   methods: {
+    showPopupEdit() {
+      this.displayPopupEdit = true;
+    },
+
+    closePopupEdit() {
+      this.displayPopupEdit = false;
+      window.location.pathname = '/forum';
+    },
+
+    closePopup() {
+      if (!this.$el.classList.contains('blurry')) return;
+      bus.$emit('close-popup');
+    },
+
     async fetchReactions() {
       const reacts = await axios.get(
         `http://localhost:3000/api/v1/react?postId=${this.post.id}`,
@@ -130,6 +158,9 @@ export default {
 
 <style lang="scss" scoped>
 /* Post content style */
+section.body {
+  min-height: 0;
+}
 
 .content {
   flex: 1 0 0;

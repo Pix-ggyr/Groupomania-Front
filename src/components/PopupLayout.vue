@@ -29,9 +29,11 @@ export default {
   name: 'PopupLayout',
   mounted() {
     document.querySelector('.body').classList.add('blurry');
+    document.querySelector('.section').classList.add('blurry');
   },
   beforeDestroy() {
     document.querySelector('.body').classList.remove('blurry');
+    document.querySelector('.section').classList.remove('blurry');
   },
   methods: {
     closePopup() {

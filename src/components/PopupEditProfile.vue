@@ -6,7 +6,7 @@
       type="text"
       id="u-firstname"
       name="u-firstname"
-      aria-label="u-firstname"
+      aria-label="update firstname"
       placeholder="Your last name"
       required
     />
