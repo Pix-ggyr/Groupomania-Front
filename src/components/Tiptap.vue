@@ -5,7 +5,7 @@
         <button
           class="menubar__button"
           :class="{ 'is-active': isActive.bold() }"
-          @click="commands.bold"
+          @click.prevent.stop="commands.bold"
         >
           <i class="fas fa-bold"></i>
         </button>
@@ -13,7 +13,7 @@
         <button
           class="menubar__button"
           :class="{ 'is-active': isActive.italic() }"
-          @click="commands.italic"
+          @click.prevent.stop="commands.italic"
         >
           <i class="fas fa-italic"></i>
         </button>
@@ -21,7 +21,7 @@
         <button
           class="menubar__button"
           :class="{ 'is-active': isActive.strike() }"
-          @click="commands.strike"
+          @click.prevent.stop="commands.strike"
         >
           <i class="fas fa-strikethrough"></i>
         </button>
@@ -29,7 +29,7 @@
         <button
           class="menubar__button"
           :class="{ 'is-active': isActive.underline() }"
-          @click="commands.underline"
+          @click.prevent.stop="commands.underline"
         >
           <i class="fas fa-underline"></i>
         </button>
@@ -37,7 +37,7 @@
         <button
           class="menubar__button"
           :class="{ 'is-active': isActive.heading({ level: 1 }) }"
-          @click="commands.heading({ level: 1 })"
+          @click.prevent.stop="commands.heading({ level: 1 })"
         >
           h1
         </button>
@@ -45,7 +45,7 @@
         <button
           class="menubar__button"
           :class="{ 'is-active': isActive.heading({ level: 2 }) }"
-          @click="commands.heading({ level: 2 })"
+          @click.prevent.stop="commands.heading({ level: 2 })"
         >
           h2
         </button>
@@ -53,7 +53,7 @@
         <button
           class="menubar__button"
           :class="{ 'is-active': isActive.heading({ level: 3 }) }"
-          @click="commands.heading({ level: 3 })"
+          @click.prevent.stop="commands.heading({ level: 3 })"
         >
           h3
         </button>
@@ -61,7 +61,7 @@
         <button
           class="menubar__button"
           :class="{ 'is-active': isActive.bullet_list() }"
-          @click="commands.bullet_list"
+          @click.prevent.stop="commands.bullet_list"
         >
           <i class="fas fa-list-ul"></i>
         </button>
@@ -69,7 +69,7 @@
         <button
           class="menubar__button"
           :class="{ 'is-active': isActive.ordered_list() }"
-          @click="commands.ordered_list"
+          @click.prevent.stop="commands.ordered_list"
         >
           <i class="fas fa-list-ol"></i>
         </button>

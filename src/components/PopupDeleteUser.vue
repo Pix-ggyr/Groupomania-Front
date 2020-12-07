@@ -1,12 +1,10 @@
 <template>
-<PopupLayout>
-  <p>Are you really sure you want to delete your user account ?
-    This action is irreversible.
-  </p>
-  <div class="actions">
-    <a id="deleteUser" href="/logout" @click.prevent.stop="deleteUserData()">
-  </div>
-</PopupLayout>
+  <PopupLayout :callback="deleteUserData">
+    <p>
+      Are you really sure you want to delete your user account ? This action is
+      irreversible.
+    </p>
+  </PopupLayout>
 </template>
 
 <script>
@@ -33,12 +31,16 @@ export default {
     async deleteUserData() {
       // eslint-disable-next-line no-console
       console.log('appel en cours');
-      const res = await axios.delete(`http://localhost:3000/api/v1/user/${JSON.parse(localStorage.getItem('user')).id}`,
+      const res = await axios.delete(
+        `http://localhost:3000/api/v1/user/${
+          JSON.parse(localStorage.getItem('user')).id
+        }`,
         {
           headers: {
             Authorization: `Bearer ${localStorage.getItem('accessToken')}`,
           },
-        });
+        },
+      );
       const deletedUser = res.data;
       // eslint-disable-next-line no-console
       console.log(deletedUser);

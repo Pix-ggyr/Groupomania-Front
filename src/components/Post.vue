@@ -41,7 +41,7 @@
         </div>
       </div>
     </div>
-    <PopupEditPost v-if="displayPopupEditPost" />
+    <PopupEditPost v-if="displayPopupEditPost" :post="post" />
     <PopupDeletePost v-if="displayPopupDeletePost" />
   </section>
 </template>
@@ -73,6 +73,8 @@ export default {
     };
   },
   async created() {
+    bus.$on('close-popup', this.closePopupEditPost);
+    bus.$on('close-popup', this.closePopupDeletePost);
     const user = await axios.get(
       `http://localhost:3000/api/v1/user/${this.post.userId}`,
       {
@@ -99,11 +101,6 @@ export default {
 
     closePopupDeletePost() {
       this.displayPopupDeletePost = false;
-    },
-
-    closePopup() {
-      if (!this.$el.classList.contains('blurry')) return;
-      bus.$emit('close-popup');
     },
 
     async fetchReactions() {

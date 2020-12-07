@@ -36,37 +36,48 @@ export default {
     PopupLayout,
     Tiptap,
   },
+  props: {
+    post: {
+      type: Object,
+      required: true,
+    },
+  },
   data() {
     return {
-      title: '',
       content: '',
+      title: '',
       image: '',
     };
   },
+  created() {
+    const { title, content, image } = this.post;
+    this.title = title;
+    this.content = content;
+    this.image = image;
+  },
   methods: {
     async updatePost() {
-      // eslint-disable-next-line no-console
-      console.log('coucou 1');
       const res = await axios.put(
         `http://localhost:3000/api/v1/post/${this.post.id}`,
+        this.updatedFields,
         {
           headers: {
             Authorization: `Bearer ${localStorage.getItem('accessToken')}`,
           },
         },
-        {
-          title: this.title,
-          content: this.content,
-          image: this.image,
-        },
       );
       const updatedPost = res.data;
-      // eslint-disable-next-line no-console
-      console.log('coucou 2');
-      // eslint-disable-next-line no-console
-      console.log(typeof updatedPost);
       bus.$emit('updated-post', updatedPost);
       bus.$emit('close-popup');
+    },
+  },
+  computed: {
+    updatedFields() {
+      return {
+        title: this.title !== this.post.title ? this.title : undefined,
+        content: this.content !== this.post.content ? this.content : undefined,
+        image: this.image !== this.post.image ? this.image : undefined,
+      };
     },
   },
 };

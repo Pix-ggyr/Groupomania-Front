@@ -51,6 +51,7 @@ import bus from '@/bus';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import PopupEditProfile from '@/components/PopupEditProfile';
+import PopupDeleteUser from '@/components/PopupDeleteUser';
 
 export default {
   name: 'Profile',
@@ -58,6 +59,7 @@ export default {
     Header,
     Footer,
     PopupEditProfile,
+    PopupDeleteUser,
   },
   created() {
     bus.$on('close-popup', this.closeEditProfilePopup);

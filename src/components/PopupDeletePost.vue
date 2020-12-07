@@ -1,13 +1,9 @@
 <template>
- <PopupLayout>
-   <p>
-     Are you sure ?
-   </p>
-   <div class="actions">
-    <a id="deletePost" href="/forum" @click.prevent.stop="deletePost()">
-  </div>
-
- </PopupLayout>
+  <PopupLayout :callback="deletePost">
+    <p>
+      Are you sure you want to delete this post ?
+    </p>
+  </PopupLayout>
 </template>
 
 <script>
@@ -24,12 +20,16 @@ export default {
     async deletePost() {
       // eslint-disable-next-line no-console
       console.log('appel en cours');
-      const res = await axios.delete(`http://localhost:3000/api/v1/user/${JSON.parse(localStorage.getItem('post')).id}`,
+      const res = await axios.delete(
+        `http://localhost:3000/api/v1/post/${
+          JSON.parse(localStorage.getItem('post')).id
+        }`,
         {
           headers: {
             Authorization: `Bearer ${localStorage.getItem('accessToken')}`,
           },
-        });
+        },
+      );
       const deletedPost = res.data;
       // eslint-disable-next-line no-console
       console.log(deletedPost);
