@@ -46,7 +46,6 @@ export default {
   },
   async created() {
     bus.$on('close-popup', this.closePopupPost);
-    bus.$on('close-popup', this.closePopupEdit);
     bus.$on('posted', this.fetchPost);
     bus.$on('updated-post', this.fetchPost);
     this.fetchPost();
@@ -59,15 +58,6 @@ export default {
     closePopupPost() {
       this.displayPopupPost = false;
       this.fetchPost();
-    },
-
-    showPopupEdit() {
-      this.displayPopupEdit = true;
-    },
-
-    closePopupEdit() {
-      this.displayPopupEdit = false;
-      window.location.pathname = '/forum';
     },
 
     closePopup() {

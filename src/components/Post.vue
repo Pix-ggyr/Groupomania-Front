@@ -16,10 +16,13 @@
         <div class="top">
           <h3 class="post-title">{{ post.title }}</h3>
           <div class="edit" v-if="this.post.userId">
-            <div @click.prevent.stop="showPopupEdit()" class="edit-post">
+            <div @click.prevent.stop="showPopupEditPost()" class="edit-post">
               <i class="fas fa-edit"></i>
             </div>
-            <div class="delete-post">
+            <div
+              @click.prevent.stop="showPopupDeletePost()"
+              class="delete-post"
+            >
               <i class="fas fa-trash-alt"></i>
             </div>
           </div>
@@ -38,18 +41,21 @@
         </div>
       </div>
     </div>
-    <PopupEditPost v-if="displayPopupEdit" />
+    <PopupEditPost v-if="displayPopupEditPost" />
+    <PopupDeletePost v-if="displayPopupDeletePost" />
   </section>
 </template>
 
 <script>
 import PopupEditPost from '@/components/PopupEditPost';
+import PopupDeletePost from '@/components/PopupDeletePost';
 import axios from 'axios';
 import bus from '@/bus';
 
 export default {
   components: {
     PopupEditPost,
+    PopupDeletePost,
   },
   name: 'Post',
   props: {
@@ -78,13 +84,21 @@ export default {
     this.fetchReactions();
   },
   methods: {
-    showPopupEdit() {
-      this.displayPopupEdit = true;
+    showPopupEditPost() {
+      this.displayPopupEditPost = true;
     },
 
-    closePopupEdit() {
-      this.displayPopupEdit = false;
+    closePopupEditPost() {
+      this.displayPopupEditPost = false;
       window.location.pathname = '/forum';
+    },
+
+    showPopupDeletePost() {
+      this.displayPopupDeletePost = true;
+    },
+
+    closePopupDeletePost() {
+      this.displayPopupDeletePost = false;
     },
 
     closePopup() {

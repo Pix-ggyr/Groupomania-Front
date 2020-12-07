@@ -4,7 +4,7 @@
     This action is irreversible.
   </p>
   <div class="actions">
-    <a id="delete" href="/logout" @click.prevent.stop="deleteUserData()">
+    <a id="deleteUser" href="/logout" @click.prevent.stop="deleteUserData()">
   </div>
 </PopupLayout>
 </template>
@@ -31,22 +31,16 @@ export default {
   },
   methods: {
     async deleteUserData() {
+      // eslint-disable-next-line no-console
       console.log('appel en cours');
       const res = await axios.delete(`http://localhost:3000/api/v1/user/${JSON.parse(localStorage.getItem('user')).id}`,
         {
           headers: {
             Authorization: `Bearer ${localStorage.getItem('accessToken')}`,
           },
-        },
-        {
-          firstname: this.firstname,
-          lastname: this.lastname,
-          email: this.email,
-          password: this.password,
-          bio: this.bio,
-          avatar: this.avatar,
         });
       const deletedUser = res.data;
+      // eslint-disable-next-line no-console
       console.log(deletedUser);
       bus.$emit('close-popup');
     },
