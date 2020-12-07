@@ -15,7 +15,7 @@
       <div class="content">
         <div class="top">
           <h3 class="post-title">{{ post.title }}</h3>
-          <div class="edit" v-if="this.post.userId">
+          <div class="edit" v-if="this.post.userId === userVerified">
             <div @click.prevent.stop="showPopupEditPost()" class="edit-post">
               <i class="fas fa-edit"></i>
             </div>
@@ -174,6 +174,9 @@ export default {
     },
     dislikes() {
       return this.reacts.filter((react) => react.type === 'dislike').length;
+    },
+    userVerified() {
+      return JSON.parse(localStorage.getItem('user')).id;
     },
   },
 };
