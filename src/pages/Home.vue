@@ -9,7 +9,7 @@
       </h1>
       <h2>Here you'll find the latest news</h2>
       <button class="post-now-btn">
-        <a href="forum.html">Go to main discussion !</a>
+        <a href="/forum">Go to main discussion !</a>
       </button>
       <div class="news-feed">
         <div

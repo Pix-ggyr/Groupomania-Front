@@ -47,14 +47,14 @@ export default {
       await axios.post(
         'http://localhost:3000/api/v1/post',
         {
-          title: this.title,
-          content: this.content,
-          image: this.image,
-        },
-        {
           headers: {
             Authorization: `Bearer ${localStorage.getItem('accessToken')}`,
           },
+        },
+        {
+          title: this.title,
+          content: this.content,
+          image: this.image,
         },
       );
       bus.$emit('posted');

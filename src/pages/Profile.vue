@@ -27,12 +27,21 @@
           </button>
         </div>
       </div>
-
-      <a id="log-out" href="/logout" aria-label="log-out">
-        Log out
-      </a>
+      <div class="actions">
+        <a id="log-out" href="/logout" aria-label="log-out">
+          Log out
+        </a>
+        <a
+          id="suppr-user"
+          @click.prevent.stop="showPopupDelete()"
+          aria-label="log-out"
+        >
+          Delete my account
+        </a>
+      </div>
     </main>
     <PopupEditProfile v-if="displayEditProfilePopup" />
+    <PopupDeleteUser v-if="displayPopupDeleteUser" />
     <Footer />
   </section>
 </template>
@@ -52,11 +61,13 @@ export default {
   },
   created() {
     bus.$on('close-popup', this.closeEditProfilePopup);
+    bus.$on('close-popup', this.PopupDeleteUser);
     this.user = JSON.parse(localStorage.getItem('user'));
   },
   data() {
     return {
       displayEditProfilePopup: false,
+      displayPopupDeleteUser: false,
     };
   },
   computed: {
@@ -68,10 +79,21 @@ export default {
     showEditProfilePopup() {
       this.displayEditProfilePopup = true;
     },
+
+    showPopupDelete() {
+      this.displayPopupDeleteUser = true;
+    },
+
     closeEditProfilePopup() {
       this.displayEditProfilePopup = false;
       window.location.pathname = '/profile';
     },
+
+    closePopupDelete() {
+      this.displayPopupDeleteUser = false;
+      window.location.pathname = '/profile';
+    },
+
     closePopup() {
       if (!this.$el.classList.contains('blurry')) return;
       bus.$emit('close-popup');
@@ -132,10 +154,29 @@ export default {
   text-decoration: none;
 }
 
+.actions {
+  display: flex;
+  flex-flow: row nowrap;
+}
+
 #log-out {
   font-size: 24px;
   margin: 72px;
   width: 120px;
+  height: 48px;
+  color: white;
+  text-align: center;
+  line-height: 48px;
+  text-decoration: none;
+  background-color: #fd2d01;
+  border-radius: 3px;
+  box-shadow: rgba(0, 0, 0, 0.356) -2px 2px 0.1em;
+}
+
+#suppr-user {
+  font-size: 24px;
+  margin: 72px;
+  width: 200px;
   height: 48px;
   color: white;
   text-align: center;

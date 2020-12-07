@@ -13,14 +13,19 @@
         <p class="user-name-feed">{{ fullname }}</p>
       </div>
       <div class="content">
-        <h3 class="post-title">{{ post.title }}</h3>
+        <div class="top">
+          <h3 class="post-title">{{ post.title }}</h3>
+          <div class="edit" v-if="this.post.userId">
+            <div @click.prevent.stop="showPopupEdit()" class="edit-post">
+              <i class="fas fa-edit"></i>
+            </div>
+            <div class="delete-post">
+              <i class="fas fa-trash-alt"></i>
+            </div>
+          </div>
+        </div>
         <img v-if="post.image" class="gif" :src="post.image" />
         <p v-html="post.content"></p>
-      </div>
-      <div class="edit-post">
-        <button @click.prevent.stop="showPopupEdit()">
-          <i class="fas fa-edit"></i>
-        </button>
       </div>
       <div class="reaction">
         <div class="like" @click.prevent.stop="toggleLike()">
@@ -178,11 +183,35 @@ section.body {
   font-size: 22px;
   color: #2274a5;
   align-self: flex-start;
+  margin-block-start: 0;
+  margin-block-end: 0;
 }
 
 .gif {
   max-width: 400px;
   width: 100%;
+}
+
+/* Post edit-delete style */
+.top {
+  display: flex;
+  flex-flow: row;
+  justify-content: space-between;
+}
+
+.edit {
+  display: flex;
+  flex-flow: row nowrap;
+  align-items: center;
+  justify-content: flex-end;
+  width: 50px;
+}
+
+.edit > .delete-post,
+.edit-post {
+  padding: 10px;
+  font-size: 20px;
+  color: lightcoral;
 }
 
 /* Reaction style */

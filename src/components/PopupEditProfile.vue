@@ -78,17 +78,17 @@ export default {
           JSON.parse(localStorage.getItem('user')).id
         }`,
         {
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem('accessToken')}`,
+          },
+        },
+        {
           firstname: this.firstname,
           lastname: this.lastname,
           email: this.email,
           password: this.password,
           bio: this.bio,
           avatar: this.avatar,
-        },
-        {
-          headers: {
-            Authorization: `Bearer ${localStorage.getItem('accessToken')}`,
-          },
         },
       );
       const updatedUser = res.data;

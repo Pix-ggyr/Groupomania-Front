@@ -1,7 +1,7 @@
 <template>
   <header class="top-header">
     <div class="logo-header">
-      <a href="home.html"
+      <a href="/home"
         ><img
           src="../assets/icon-left-font-monochrome-white.png"
           alt="groupomania logo"
