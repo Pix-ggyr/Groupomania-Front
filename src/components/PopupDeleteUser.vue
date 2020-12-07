@@ -29,9 +29,7 @@ export default {
   },
   methods: {
     async deleteUserData() {
-      // eslint-disable-next-line no-console
-      console.log('appel en cours');
-      const res = await axios.delete(
+      await axios.delete(
         `http://localhost:3000/api/v1/user/${
           JSON.parse(localStorage.getItem('user')).id
         }`,
@@ -41,10 +39,7 @@ export default {
           },
         },
       );
-      const deletedUser = res.data;
-      // eslint-disable-next-line no-console
-      console.log(deletedUser);
-      bus.$emit('close-popup');
+      bus.$emit('user-deleted');
     },
   },
 };

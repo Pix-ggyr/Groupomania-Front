@@ -42,7 +42,7 @@
       </div>
     </div>
     <PopupEditPost v-if="displayPopupEditPost" :post="post" />
-    <PopupDeletePost v-if="displayPopupDeletePost" />
+    <PopupDeletePost v-if="displayPopupDeletePost" :post="post" />
   </section>
 </template>
 
@@ -101,6 +101,13 @@ export default {
 
     closePopupDeletePost() {
       this.displayPopupDeletePost = false;
+    },
+
+    closePopup() {
+      // console.log(this);
+      // console.log('coucou');
+      if (!this.$el.classList.contains('blurry')) return;
+      bus.$emit('close-popup');
     },
 
     async fetchReactions() {

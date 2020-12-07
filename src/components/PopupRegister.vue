@@ -8,7 +8,7 @@
       name="u-firstname"
       aria-label="u-firstname"
       placeholder="firstname"
-      required
+      required="true"
     /><br />
     <label for="u-lastname">Your lastname* :</label><br />
     <input
@@ -18,7 +18,7 @@
       name="u-lastname"
       aria-label="u-lastname"
       placeholder="lastname"
-      required
+      required="true"
     /><br />
     <label for="u-email">Your email* :</label><br />
     <input
@@ -28,7 +28,7 @@
       name="u-email"
       aria-label="u-email"
       placeholder="your.email@mail.com"
-      required
+      required="true"
     /><br />
     <label for="u-password">Your password* :</label><br />
     <input
@@ -38,7 +38,7 @@
       name="u-password"
       aria-label="u-password"
       placeholder="Your password"
-      required
+      required="true"
     /><br />
   </PopupLayout>
 </template>

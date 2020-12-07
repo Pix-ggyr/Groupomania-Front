@@ -1,7 +1,7 @@
 <template>
-  <PopupLayout :callback="deletePost">
+  <PopupLayout title="You're about to delete your post" :callback="deletePost">
     <p>
-      Are you sure you want to delete this post ?
+      Are you sure you want to so ?
     </p>
   </PopupLayout>
 </template>
@@ -16,23 +16,37 @@ export default {
   components: {
     PopupLayout,
   },
+  props: {
+    post: {
+      type: Object,
+      required: true,
+    },
+  },
+  data() {
+    return {
+      content: '',
+      title: '',
+      image: '',
+    };
+  },
+  created() {
+    const { title, content, image } = this.post;
+    this.title = title;
+    this.content = content;
+    this.image = image;
+  },
   methods: {
     async deletePost() {
-      // eslint-disable-next-line no-console
-      console.log('appel en cours');
       const res = await axios.delete(
-        `http://localhost:3000/api/v1/post/${
-          JSON.parse(localStorage.getItem('post')).id
-        }`,
+        `http://localhost:3000/api/v1/post/${this.post.id}`,
         {
           headers: {
             Authorization: `Bearer ${localStorage.getItem('accessToken')}`,
           },
         },
       );
+      // eslint-disable-next-line no-unused-vars
       const deletedPost = res.data;
-      // eslint-disable-next-line no-console
-      console.log(deletedPost);
       bus.$emit('close-popup');
     },
   },

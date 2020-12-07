@@ -1,5 +1,5 @@
 <template>
-  <section class="body">
+  <section class="body" @click="closePopup">
     <Header />
     <main class="container">
       <h1>Let's share with the community</h1>

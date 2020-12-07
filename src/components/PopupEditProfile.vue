@@ -10,7 +10,7 @@
       placeholder="Your last name"
       required
     />
-    <label for="u-name">Your name :</label>
+    <label for="u-name">Your new name :</label>
     <input
       v-model="lastname"
       type="text"
@@ -19,7 +19,7 @@
       aria-label="u-name"
       placeholder="Your last name"
     />
-    <label for="u-email">Your email :</label>
+    <label for="u-email">Your new email :</label>
     <input
       v-model="email"
       type="email"
@@ -28,7 +28,7 @@
       aria-label="u-email"
       placeholder="Your new email"
     />
-    <label for="u-password">Your email :</label>
+    <label for="u-password">Your new password :</label>
     <input
       v-model="password"
       type="password"
@@ -37,7 +37,7 @@
       aria-label="u-password"
       placeholder="Your new password"
     />
-    <label for="u-description">Description :</label>
+    <label for="u-description">Your new description :</label>
     <textarea
       v-model="bio"
       type="text"
@@ -47,7 +47,7 @@
       placeholder="Tell us about you !"
     ></textarea>
     <label for="u-avatar">New profile picture :</label>
-    <input class="send-pp" v-model="avatar" value="Choose a profile picture" />
+    <input class="send-pp" type="file" @change="convertToBase64" />
   </PopupLayout>
 </template>
 
@@ -61,6 +61,12 @@ export default {
   components: {
     PopupLayout,
   },
+  props: {
+    user: {
+      type: Object,
+      required: true,
+    },
+  },
   data() {
     return {
       firstname: '',
@@ -71,29 +77,61 @@ export default {
       avatar: '',
     };
   },
+  created() {
+    // eslint-disable-next-line
+    const { firstname, lastname, email, password, bio, avatar } = this.user;
+    this.firstname = firstname;
+    this.lastname = lastname;
+    this.email = email;
+    this.password = password;
+    this.bio = bio;
+    this.avatar = avatar;
+  },
   methods: {
+    async convertToBase64(event) {
+      const files = event.target.files || event.dataTransfer.files;
+      if (!files.length) {
+        return;
+      }
+      const avatar = files[0];
+      const base64Avatar = await this.imageToBase64(avatar);
+      this.avatar = base64Avatar;
+    },
+    imageToBase64(image) {
+      return new Promise((resolve, reject) => {
+        const reader = new FileReader();
+        reader.readAsDataURL(image);
+        reader.onload = () => resolve(reader.result);
+        reader.onerror = (error) => reject(error);
+      });
+    },
     async updateUser() {
       const res = await axios.put(
         `http://localhost:3000/api/v1/user/${
           JSON.parse(localStorage.getItem('user')).id
         }`,
+        this.updatedFields,
         {
           headers: {
             Authorization: `Bearer ${localStorage.getItem('accessToken')}`,
           },
         },
-        {
-          firstname: this.firstname,
-          lastname: this.lastname,
-          email: this.email,
-          password: this.password,
-          bio: this.bio,
-          avatar: this.avatar,
-        },
       );
       const updatedUser = res.data;
       bus.$emit('updated-user', updatedUser);
       bus.$emit('close-popup');
+    },
+  },
+  computed: {
+    updatedFields() {
+      return {
+        firstname: this.firstname,
+        lastname: this.lastname,
+        email: this.email,
+        password: this.password,
+        bio: this.bio,
+        avatar: this.avatar,
+      };
     },
   },
 };

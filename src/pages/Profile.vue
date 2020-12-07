@@ -28,9 +28,6 @@
         </div>
       </div>
       <div class="actions">
-        <a id="log-out" href="/logout" aria-label="log-out">
-          Log out
-        </a>
         <a
           id="suppr-user"
           @click.prevent.stop="showPopupDelete()"
@@ -38,9 +35,12 @@
         >
           Delete my account
         </a>
+        <a id="log-out" href="/logout" aria-label="log-out">
+          Log out
+        </a>
       </div>
     </main>
-    <PopupEditProfile v-if="displayEditProfilePopup" />
+    <PopupEditProfile v-if="displayEditProfilePopup" :user="user" />
     <PopupDeleteUser v-if="displayPopupDeleteUser" />
     <Footer />
   </section>
@@ -64,10 +64,12 @@ export default {
   created() {
     bus.$on('close-popup', this.closeEditProfilePopup);
     bus.$on('close-popup', this.PopupDeleteUser);
+    bus.$on('user-deleted', this.logoutUser);
     this.user = JSON.parse(localStorage.getItem('user'));
   },
   data() {
     return {
+      user: {},
       displayEditProfilePopup: false,
       displayPopupDeleteUser: false,
     };
@@ -99,6 +101,10 @@ export default {
     closePopup() {
       if (!this.$el.classList.contains('blurry')) return;
       bus.$emit('close-popup');
+    },
+
+    logoutUser() {
+      window.location.pathname = '/logout';
     },
   },
 };

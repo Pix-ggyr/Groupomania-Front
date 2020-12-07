@@ -13,6 +13,9 @@
           <li><a href="/home">Home</a></li>
           <li><a href="/forum">Forum</a></li>
           <li><a href="/profile">Profile</a></li>
+          <li class="logout">
+            <a href="/logout"><i class="fas fa-power-off"></i></a>
+          </li>
         </ul>
       </nav>
     </div>
