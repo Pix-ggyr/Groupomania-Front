@@ -57,13 +57,10 @@ ul {
   padding-inline-start: 0;
 }
 
-li {
-  padding: 5px;
-}
-
 li,
 a {
-  font-size: 18px;
+  padding-top: 5px;
+  font-size: 21px;
   font-weight: 600;
   color: white;
 }

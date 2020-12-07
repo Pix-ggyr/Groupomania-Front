@@ -150,4 +150,9 @@ textarea,
   border-radius: 5px;
   padding: 5px;
 }
+
+.popup > .popup-form input.send-pp {
+  background-color: cornflowerblue;
+  color: white;
+}
 </style>

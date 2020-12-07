@@ -168,8 +168,9 @@ export default {
 }
 
 #log-out {
-  font-size: 24px;
-  margin: 72px;
+  font-size: 22px;
+  margin-top: 46px;
+  margin-left: 30px;
   width: 120px;
   height: 48px;
   color: white;
@@ -182,8 +183,9 @@ export default {
 }
 
 #suppr-user {
-  font-size: 24px;
-  margin: 72px;
+  font-size: 22px;
+  margin-top: 46px;
+  margin-left: 30px;
   width: 200px;
   height: 48px;
   color: white;
@@ -204,8 +206,8 @@ export default {
   }
 
   .user-profile > #profile-pct > img {
-    max-width: 150px;
-    width: 80%;
+    height: 170px;
+    width: 170px;
   }
 
   .user-profile > #user-infos {
@@ -221,6 +223,30 @@ export default {
 
   .user-profile > #user-infos > #user-description {
     padding: 10px;
+  }
+
+  .actions {
+    display: flex;
+    flex-flow: column-reverse nowrap;
+    align-items: center;
+  }
+
+  .actions > a#suppr-user {
+    margin-top: 25px;
+    margin-bottom: 30px;
+    margin-left: 0;
+    font-size: 18px;
+    max-width: 150px;
+    height: 50px;
+  }
+
+  .actions > a#log-out {
+    font-size: 18px;
+    height: 50px;
+    max-width: 100px;
+    margin-top: 40px;
+    margin-left: 0;
+    margin-bottom: 10px;
   }
 }
 </style>
