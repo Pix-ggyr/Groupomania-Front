@@ -28,6 +28,8 @@ import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import Post from '@/components/Post';
 import PopupPost from '@/components/PopupPost';
+// import PopupEditPost from '@components/PopupEditPost';
+// import PopupDeletePost from '@/components/PopupDeletePost';
 import axios from 'axios';
 
 export default {
@@ -37,6 +39,8 @@ export default {
     Footer,
     Post,
     PopupPost,
+    // PopupEditPost,
+    // PopupDeletePost,
   },
   data() {
     return {
@@ -46,6 +50,8 @@ export default {
   },
   async created() {
     bus.$on('close-popup', this.closePopupPost);
+    bus.$on('close-popup', this.closePopupEditPost);
+    bus.$on('close-popup', this.closePopupDeletePost);
     bus.$on('posted', this.fetchPost);
     bus.$on('updated-post', this.fetchPost);
     this.fetchPost();
@@ -58,6 +64,22 @@ export default {
     closePopupPost() {
       this.displayPopupPost = false;
       this.fetchPost();
+    },
+
+    showPopupEditPost() {
+      this.displayPopupEdit = true;
+    },
+
+    closePopupEditPost() {
+      this.displayPopupEdit = false;
+    },
+
+    showPopupDeletePost() {
+      this.displayPopupEdit = true;
+    },
+
+    closePopupDeletePost() {
+      this.displayPopupEdit = false;
     },
 
     closePopup() {

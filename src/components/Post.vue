@@ -66,7 +66,8 @@ export default {
   },
   data() {
     return {
-      displayPopupEdit: false,
+      displayPopupEditPost: false,
+      displayPopupDeletePost: false,
       user: {},
       reacts: [],
     };
@@ -90,7 +91,6 @@ export default {
 
     closePopupEditPost() {
       this.displayPopupEditPost = false;
-      window.location.pathname = '/forum';
     },
 
     showPopupDeletePost() {
