@@ -185,7 +185,6 @@ export default {
       return this.myUser.id;
     },
     userIsAdmin() {
-      console.log(this.myUser);
       return this.myUser.isAdmin;
     },
   },
