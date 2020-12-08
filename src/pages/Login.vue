@@ -49,7 +49,7 @@
 <script>
 import bus from '@/bus';
 import Footer from '@/components/Footer';
-import PopupRegister from '@/components/PopupRegister';
+import PopupRegister from '@/components/popups/PopupRegister';
 import axios from 'axios';
 
 export default {

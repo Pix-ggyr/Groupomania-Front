@@ -50,8 +50,8 @@
 </template>
 
 <script>
-import PopupEditPost from '@/components/PopupEditPost';
-import PopupDeletePost from '@/components/PopupDeletePost';
+import PopupEditPost from '@/components/popups/PopupEditPost';
+import PopupDeletePost from '@/components/popups/PopupDeletePost';
 import axios from 'axios';
 import bus from '@/bus';
 

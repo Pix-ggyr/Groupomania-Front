@@ -25,7 +25,7 @@
 </template>
 
 <script>
-import PopupLayout from '@/components/PopupLayout';
+import PopupLayout from '@/components/popups/PopupLayout';
 import Tiptap from '@/components/Tiptap';
 import bus from '@/bus';
 import axios from 'axios';

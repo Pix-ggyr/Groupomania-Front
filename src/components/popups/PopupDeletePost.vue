@@ -7,7 +7,7 @@
 </template>
 
 <script>
-import PopupLayout from '@/components/PopupLayout';
+import PopupLayout from '@/components/popups/PopupLayout';
 import axios from 'axios';
 import bus from '@/bus';
 

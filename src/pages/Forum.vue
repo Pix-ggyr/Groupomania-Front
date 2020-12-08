@@ -27,7 +27,7 @@ import bus from '@/bus';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import Post from '@/components/Post';
-import PopupPost from '@/components/PopupPost';
+import PopupPost from '@/components/popups/PopupPost';
 import axios from 'axios';
 
 export default {

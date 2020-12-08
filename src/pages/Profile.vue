@@ -50,8 +50,8 @@
 import bus from '@/bus';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
-import PopupEditProfile from '@/components/PopupEditProfile';
-import PopupDeleteUser from '@/components/PopupDeleteUser';
+import PopupEditProfile from '@/components/popups/PopupEditProfile';
+import PopupDeleteUser from '@/components/popups/PopupDeleteUser';
 
 export default {
   name: 'Profile',
