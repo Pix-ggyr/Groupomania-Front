@@ -6,6 +6,7 @@
 </template>
 
 <script>
+import axios from 'axios';
 import bus from '@/bus';
 import routes from './Routes';
 
@@ -44,6 +45,21 @@ export default {
     bus.$on('logged-in', this.logUserIn);
     bus.$on('logout', this.logUserOut);
     bus.$on('updated-user', this.updateUser);
+    window.setInterval(async () => {
+      try {
+        if (!this.token) {
+          return;
+        }
+        const user = await axios.get('http://localhost:3000/api/v1/user/me', {
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem('accessToken')}`,
+          },
+        });
+        localStorage.setItem('user', JSON.stringify(user));
+      } catch (_e) {
+        delete this.token;
+      }
+    }, 60 * 1000);
   },
   methods: {
     logUserIn({ accessToken, user }) {
