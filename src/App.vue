@@ -78,11 +78,11 @@ export default {
             localStorage.setItem('user', JSON.stringify(user));
           })
           .catch(() => {
-            console.log('coucou');
             delete this.accessToken;
           });
       } catch (_e) {
-        console.log('coucou 2');
+        // eslint-disable-next-line no-console
+        console.log('An error has occurred');
       }
     },
   },
