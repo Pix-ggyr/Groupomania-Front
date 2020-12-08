@@ -1,8 +1,6 @@
 <template>
-  <PopupLayout title="You're about to delete your post" :callback="deletePost">
-    <p>
-      Are you sure you want to so ?
-    </p>
+  <PopupLayout title="Caution !" :callback="deletePost">
+    <p>You are about to delete your post.<br />Are you sure you want to so ?</p>
   </PopupLayout>
 </template>
 
@@ -52,3 +50,11 @@ export default {
   },
 };
 </script>
+
+<style lang="scss" scoped>
+p {
+  color: white;
+  text-align: center;
+  font-size: 16px;
+}
+</style>

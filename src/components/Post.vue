@@ -242,6 +242,7 @@ section.body {
   padding: 10px;
   font-size: 20px;
   color: lightcoral;
+  cursor: pointer;
 }
 
 /* Reaction style */
@@ -260,6 +261,7 @@ section.body {
   display: flex;
   flex-flow: row wrap;
   align-items: center;
+  cursor: pointer;
 }
 
 .reaction > .like i,
@@ -273,6 +275,7 @@ section.body {
   display: flex;
   flex-flow: row wrap;
   align-items: center;
+  cursor: pointer;
 }
 
 .reaction > .dislike i,

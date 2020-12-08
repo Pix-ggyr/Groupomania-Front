@@ -1,5 +1,5 @@
 <template>
-  <PopupLayout :callback="deleteUserData">
+  <PopupLayout title="Watch out !" :callback="deleteUserData">
     <p>
       Are you really sure you want to delete your user account ? This action is
       irreversible.
@@ -44,3 +44,10 @@ export default {
   },
 };
 </script>
+
+<style lang="scss" scoped>
+p {
+  color: white;
+  text-align: center;
+}
+</style>

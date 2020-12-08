@@ -154,5 +154,10 @@ textarea,
 .popup > .popup-form input.send-pp {
   background-color: cornflowerblue;
   color: white;
+  font-size: 13px;
+}
+
+.popup > .popup-form > .popup-submit-btn > input {
+  cursor: pointer;
 }
 </style>

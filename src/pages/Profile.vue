@@ -165,6 +165,7 @@ export default {
 .actions {
   display: flex;
   flex-flow: row nowrap;
+  margin-bottom: 72px;
 }
 
 #log-out {
@@ -195,6 +196,7 @@ export default {
   background-color: #fd2d01;
   border-radius: 3px;
   box-shadow: rgba(0, 0, 0, 0.356) -2px 2px 0.1em;
+  cursor: pointer;
 }
 
 @media (max-width: 775px) {
