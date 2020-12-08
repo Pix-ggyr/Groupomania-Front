@@ -45,6 +45,7 @@ export default {
     bus.$on('logged-in', this.logUserIn);
     bus.$on('logout', this.logUserOut);
     bus.$on('updated-user', this.updateUser);
+    this.checkAuth();
   },
   methods: {
     logUserIn({ accessToken, user }) {
@@ -61,28 +62,24 @@ export default {
       this.getMyInfos();
       window.setInterval(async () => {
         this.getMyInfos();
-      }, 60 * 1000);
+      }, 10 * 1000);
     },
     async getMyInfos() {
       try {
-        if (!this.token) {
+        if (!this.accessToken) {
           return;
         }
-        axios
-          .get('http://localhost:3000/api/v1/user/me', {
-            headers: {
-              Authorization: `Bearer ${localStorage.getItem('accessToken')}`,
-            },
-          })
-          .then((user) => {
-            localStorage.setItem('user', JSON.stringify(user));
-          })
-          .catch(() => {
-            delete this.accessToken;
-          });
+        const user = await axios.get('http://localhost:3000/api/v1/user/me', {
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem('accessToken')}`,
+          },
+        });
+
+        localStorage.setItem('user', JSON.stringify(user));
       } catch (_e) {
         // eslint-disable-next-line no-console
         console.log('An error has occurred');
+        this.accessToken = null;
       }
     },
   },
