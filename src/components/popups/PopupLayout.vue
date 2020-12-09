@@ -1,6 +1,6 @@
 <template>
   <portal to="popup">
-    <section class="popup">
+    <section class="popup" :style="'top:' + getScrollCenterPosition() + 'px'">
       <header class="popup-header">
         <h1 class="popup-title">{{ title }}</h1>
         <button class="popup-close-btn" @click.prevent="closePopup()">
@@ -36,6 +36,9 @@ export default {
   methods: {
     closePopup() {
       bus.$emit('close-popup');
+    },
+    getScrollCenterPosition() {
+      return window.scrollY + document.documentElement.clientHeight / 2;
     },
   },
   props: {
