@@ -54,7 +54,6 @@ export default {
     },
     logUserOut() {
       this.accessToken = null;
-      localStorage.removeItem('user');
     },
     updateUser(updatedUser) {
       localStorage.setItem('user', JSON.stringify(updatedUser));
@@ -81,7 +80,6 @@ export default {
         // eslint-disable-next-line no-console
         console.log('An error has occurred');
         this.accessToken = null;
-        localStorage.removeItem('user');
       }
     },
   },

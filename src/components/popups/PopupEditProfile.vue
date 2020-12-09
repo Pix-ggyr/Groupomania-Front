@@ -28,15 +28,6 @@
       aria-label="u-email"
       placeholder="Your new email"
     />
-    <label for="u-password">Your new password :</label>
-    <input
-      v-model="password"
-      type="password"
-      id="u-password"
-      name="u-password"
-      aria-label="u-password"
-      placeholder="Your new password"
-    />
     <label for="u-description">Your new description :</label>
     <textarea
       v-model="bio"
@@ -72,7 +63,6 @@ export default {
       firstname: '',
       lastname: '',
       email: '',
-      password: '',
       bio: '',
       avatar: '',
     };
@@ -83,7 +73,6 @@ export default {
     this.firstname = firstname;
     this.lastname = lastname;
     this.email = email;
-    this.password = password;
     this.bio = bio;
     this.avatar = avatar;
   },
@@ -128,7 +117,6 @@ export default {
         firstname: this.firstname,
         lastname: this.lastname,
         email: this.email,
-        password: this.password,
         bio: this.bio,
         avatar: this.avatar,
       };
