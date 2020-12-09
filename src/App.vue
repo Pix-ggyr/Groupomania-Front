@@ -54,6 +54,7 @@ export default {
     },
     logUserOut() {
       this.accessToken = null;
+      localStorage.removeItem('user');
     },
     updateUser(updatedUser) {
       localStorage.setItem('user', JSON.stringify(updatedUser));
@@ -62,7 +63,7 @@ export default {
       this.getMyInfos();
       window.setInterval(async () => {
         this.getMyInfos();
-      }, 10 * 1000);
+      }, 60 * 1000);
     },
     async getMyInfos() {
       try {
@@ -75,11 +76,12 @@ export default {
           },
         });
 
-        localStorage.setItem('user', JSON.stringify(user));
+        localStorage.setItem('user', JSON.stringify(user.data));
       } catch (_e) {
         // eslint-disable-next-line no-console
         console.log('An error has occurred');
         this.accessToken = null;
+        localStorage.removeItem('user');
       }
     },
   },
