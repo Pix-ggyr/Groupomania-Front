@@ -53,13 +53,29 @@ vue ui
 
 ---
 
-[Insert gif here](#)
+![Vue CLI Builder](https://raw.githubusercontent.com/Pix-ggyr/Groupomania-Front/dev/public/docs/assets/serve.gif)
 
 ## Previews
 
 ---
 
-Insert screenshots
+![Insert gif here](https://github.com/Pix-ggyr/Groupomania-Front/blob/dev/public/docs/assets/mockup_2.png?raw=true)
+![Insert gif here](https://raw.githubusercontent.com/Pix-ggyr/Groupomania-Front/dev/public/docs/assets/profile.png)
+![Insert gif here](https://github.com/Pix-ggyr/Groupomania-Front/blob/dev/public/docs/assets/Mobile1.png?raw=true)
+![Insert gif here](https://raw.githubusercontent.com/Pix-ggyr/Groupomania-Front/dev/public/docs/assets/Mobile2.png)
+
+## Pages
+
+- Login
+  - Register
+- Homepage
+- Forum
+  - Create a post
+  - Edit a post
+  - Delete a post
+  - React to a post
+- Profile
+  - Edit user profile
 
 ## Author
 
